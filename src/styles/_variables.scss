@@ -1,0 +1,61 @@
+:root {
+  /* Colors */
+  --color-bg-primary: #0d0c0c;
+  --color-bg-sidebar: #1d1c1c;
+  --color-bg-header: #1d1c1c;
+  --color-bg-nav-item: #1a1919;
+  --color-bg-card: #2c2b2b;
+
+  --color-accent: #ff9804;
+
+  --color-text-primary: #fafafa;
+  --color-text-muted: #c4c0c0;
+
+  /* Borders */
+  --color-border: #393737;
+  --color-border-subtle: rgba(255, 255, 255, 0.15);
+  --color-border-header: rgba(255, 255, 255, 0.03);
+
+  /* Shadow */
+  --shadow-default: 0 2px 16px rgba(8, 8, 7, 0.1);
+
+  /* Layout */
+  --sidebar-width: 24rem;
+  --sidebar-width-collapsed: 5.6rem;
+  --header-height: 6.4rem;
+
+  /* Spacing */
+  --space-xs: 0.4rem;
+  --space-sm: 0.8rem;
+  --space-md: 1.2rem;
+  --space-lg: 1.6rem;
+  --space-xl: 2rem;
+  --space-2xl: 3.2rem;
+
+  /* Border radius */
+  --radius-sm: 0.4rem;
+  --radius-md: 0.8rem;
+  --radius-lg: 1.2rem;
+
+  /* Typography */
+  --font-family: 'Inter', system-ui, sans-serif;
+
+  --text-sm: 1.2rem;
+  --text-md: 1.4rem;
+  --text-lg: 1.6rem;
+  --heading-04: 2.4rem;
+
+  --lh-sm: 1.6rem;
+  --lh-md: 2rem;
+  --lh-lg: 2.4rem;
+  --lh-heading-04: 3.2rem;
+
+  /* Transitions */
+  --transition-base: 200ms ease;
+  --transition-sidebar: 250ms ease;
+
+  /* Z-index */
+  --z-sidebar: 100;
+  --z-header: 200;
+  --z-overlay: 50;
+}
