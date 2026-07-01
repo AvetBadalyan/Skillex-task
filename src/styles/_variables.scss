@@ -5,15 +5,17 @@
   --color-bg-header: #1d1c1c;
   --color-bg-nav-item: #1a1919;
   --color-bg-card: #2c2b2b;
+  --color-bg-control: #393737;
 
-  --color-accent: #ff9804;
+  --color-accent: #ff9b04;
 
   --color-text-primary: #fafafa;
   --color-text-muted: #c4c0c0;
 
   /* Borders */
   --color-border: #393737;
-  --color-border-subtle: rgba(255, 255, 255, 0.15);
+  --color-border-subtle: rgba(255, 255, 255, 0.15); /* quaternary/border 15% */
+  --color-border-input: rgba(255, 255, 255, 0.25); /* transparent/06 (search) */
   --color-border-header: rgba(255, 255, 255, 0.03);
 
   /* Shadow */
@@ -21,16 +23,18 @@
 
   /* Layout */
   --sidebar-width: 24rem;
-  --sidebar-width-collapsed: 5.6rem;
+  --sidebar-width-collapsed: 7.2rem;
   --header-height: 6.4rem;
 
-  /* Spacing */
-  --space-xs: 0.4rem;
-  --space-sm: 0.8rem;
-  --space-md: 1.2rem;
-  --space-lg: 1.6rem;
-  --space-xl: 2rem;
-  --space-2xl: 3.2rem;
+  /* Spacing (numeric scale — matches Figma spacing tokens) */
+  --space-4: 0.4rem;
+  --space-6: 0.6rem;
+  --space-8: 0.8rem;
+  --space-12: 1.2rem;
+  --space-16: 1.6rem;
+  --space-20: 2rem;
+  --space-24: 2.4rem;
+  --space-32: 3.2rem;
 
   /* Border radius */
   --radius-sm: 0.4rem;

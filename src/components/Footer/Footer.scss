@@ -1,0 +1,15 @@
+@use '../../styles/breakpoints' as *;
+
+.footer {
+  flex-shrink: 0;
+  background-color: var(--color-bg-sidebar);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer__inner {
+  padding: var(--space-32) var(--space-16);
+
+  @include screen-from($screen-tablet) {
+    padding: var(--space-32);
+  }
+}

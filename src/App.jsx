@@ -1,9 +1,8 @@
 import './index.scss';
+import Layout from './components/Layout/Layout';
 
 function App() {
-  return (
-    <div className="app">{/* Layout components will be added here */}</div>
-  );
+  return <Layout />;
 }
 
 export default App;

@@ -1,0 +1,10 @@
+@use '../../styles/breakpoints' as *;
+
+.main {
+  flex: 1;
+  padding: var(--space-16);
+
+  @include screen-from($screen-tablet) {
+    padding: var(--space-32);
+  }
+}

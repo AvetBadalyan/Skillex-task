@@ -1,0 +1,11 @@
+// Screen sizes used for responsive (mobile-first) styles.
+// SCSS variables are required here because media queries can't read CSS custom properties.
+$screen-tablet: 768px;
+$screen-desktop: 1024px;
+
+// Apply styles from the given screen size and up.
+@mixin screen-from($size) {
+  @media (min-width: $size) {
+    @content;
+  }
+}

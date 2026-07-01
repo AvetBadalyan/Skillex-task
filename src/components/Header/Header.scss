@@ -1,0 +1,65 @@
+@use '../../styles/breakpoints' as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  flex-shrink: 0;
+  height: var(--header-height);
+  padding: var(--space-12) var(--space-20);
+  background-color: var(--color-bg-header);
+  border-bottom: 1px solid var(--color-border-header);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+
+  @include screen-from($screen-desktop) {
+    position: static;
+  }
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.header__center {
+  flex: 1;
+  min-width: 0;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-left: auto;
+}
+
+.header__menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-control);
+  box-shadow: var(--shadow-default);
+  color: var(--color-text-primary);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base);
+
+  &:hover {
+    border-color: var(--color-border);
+    filter: brightness(1.15);
+  }
+}
+
+.header__menu-icon {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
