@@ -7,24 +7,41 @@
 }
 
 .footer__inner {
-  padding: var(--space-32) var(--space-16);
-  max-width: 120rem;
+  padding: var(--space-32);
+  max-width: 144rem;
   margin: 0 auto;
-
-  @include screen-from($screen-tablet) {
-    padding: var(--space-32);
-  }
 }
 
+.footer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  margin-bottom: var(--space-32);
+}
+
+.footer__logo {
+  display: block;
+  width: 12.9rem;
+  height: auto;
+}
+
+// Mobile: sections stack as full-width accordions, social sits below them.
+// Tablet+: "display: contents" unwraps .footer__sections so each section
+// becomes a direct sibling of .footer__social inside the same flex row —
+// this is what puts social icons level with the link columns instead of
+// pushed onto their own row underneath.
 .footer__content {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-32);
   margin-bottom: var(--space-32);
 
   @include screen-from($screen-tablet) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-48);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-24);
   }
 }
 
@@ -34,27 +51,55 @@
   gap: var(--space-32);
 
   @include screen-from($screen-tablet) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-24);
-  }
-
-  @include screen-from($screen-desktop) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-32);
+    display: contents;
   }
 }
 
 .footer__section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
+  @include screen-from($screen-tablet) {
+    flex: 1 1 12rem;
+  }
 }
 
 .footer__section-title {
   margin: 0;
-  font-size: var(--text-md);
-  font-weight: 600;
+  font-size: var(--heading-04);
+  font-weight: 700;
+  line-height: var(--lh-heading-04);
   color: var(--color-text-primary);
+}
+
+// On mobile each section is a collapsible accordion; from tablet up it's
+// always expanded and the toggle button just renders as a plain heading.
+.footer__section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  width: 100%;
+  margin-bottom: var(--space-12);
+
+  @include screen-from($screen-tablet) {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.footer__section-chevron {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+  transition: transform var(--transition-base);
+
+  @include screen-from($screen-tablet) {
+    display: none;
+  }
+}
+
+.footer__section--open .footer__section-chevron {
+  transform: rotate(180deg);
 }
 
 .footer__section-list {
@@ -64,10 +109,22 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--transition-base);
+
+  @include screen-from($screen-tablet) {
+    max-height: none;
+  }
+}
+
+.footer__section--open .footer__section-list {
+  max-height: 40rem;
 }
 
 .footer__link {
-  font-size: var(--text-sm);
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
   color: var(--color-text-muted);
   text-decoration: none;
   transition: color var(--transition-base);
@@ -79,13 +136,20 @@
 
 .footer__social {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
+  gap: var(--space-12);
 
   @include screen-from($screen-tablet) {
-    grid-column: 1 / -1;
-    justify-content: flex-end;
-    align-items: flex-start;
+    flex: 1 1 16rem;
   }
+}
+
+.footer__social-title {
+  margin: 0;
+  font-size: var(--heading-05);
+  font-weight: 700;
+  color: var(--color-text-primary);
 }
 
 .footer__social-items {
@@ -97,39 +161,58 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 4rem;
-  height: 4rem;
+  width: 3.6rem;
+  height: 3.6rem;
   border-radius: var(--radius-md);
-  background-color: rgba(255, 155, 4, 0.1);
-  color: var(--color-accent);
+  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-control);
+  color: var(--color-text-primary);
   transition:
     background-color var(--transition-base),
     color var(--transition-base);
 
   &:hover {
-    background-color: var(--color-accent);
+    background-color: var(--color-text-primary);
     color: var(--color-bg-primary);
   }
 }
 
 .footer__social-icon {
   display: block;
-  width: 2rem;
-  height: 2rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
-.footer__bottom {
-  padding-top: var(--space-32);
+// Brand logo strip: fixed icon height with generous vertical breathing room,
+// per the Figma dev-mode spec (24px logos in a 62px-tall row).
+.footer__payments {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-48);
+  min-height: 6.2rem;
+  padding: var(--space-24) 0;
   border-top: 1px solid var(--color-border);
+}
+
+.footer__payment-logo {
+  display: block;
+  height: 2.4rem;
+  width: auto;
+}
+
+.footer__legal {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+}
+
+.footer__legal-text {
   display: flex;
   flex-direction: column;
-  gap: var(--space-16);
-
-  @include screen-from($screen-tablet) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
+  gap: var(--space-8);
 }
 
 .footer__copyright {
@@ -138,35 +221,24 @@
   color: var(--color-text-muted);
 }
 
-.footer__payments {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-
-  @include screen-from($screen-tablet) {
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-16);
-  }
-}
-
-.footer__payment-label {
-  font-size: var(--text-sm);
+.footer__disclaimer {
+  margin: 0;
+  max-width: 80.5rem;
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
   color: var(--color-text-muted);
-  white-space: nowrap;
 }
 
-.footer__payment-methods {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-8);
-}
-
-.footer__payment-method {
-  font-size: var(--text-sm);
-  color: var(--color-text-primary);
-  padding: var(--space-6) var(--space-12);
-  border-radius: var(--radius-sm);
-  background-color: rgba(255, 155, 4, 0.05);
+.footer__age-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
   border: 1px solid var(--color-border-subtle);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
 }

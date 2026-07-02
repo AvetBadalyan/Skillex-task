@@ -9,6 +9,7 @@
   padding: var(--space-12) var(--space-20);
   background-color: var(--color-bg-header);
   border-bottom: 1px solid var(--color-border-header);
+  box-shadow: var(--shadow-header);
   position: sticky;
   top: 0;
   z-index: var(--z-header);
@@ -22,43 +23,37 @@
   display: flex;
   align-items: center;
   gap: var(--space-12);
-  flex-shrink: 0;
-}
-
-.header__logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 4rem;
-  height: 4rem;
-}
-
-.header__logo-icon {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.header__center {
   flex: 1;
   min-width: 0;
-  display: none;
-
-  @include screen-from($screen-desktop) {
-    display: flex;
-  }
 }
 
+// Icon-only square by default; expands in place to a full text input on
+// focus so the collapsed state matches Figma while staying usable.
 .header__search {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
-  width: 100%;
-  max-width: 32rem;
-  padding: var(--space-8) var(--space-16);
+  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
   border-radius: var(--radius-md);
   background-color: var(--color-bg-control);
   border: 1px solid var(--color-border-subtle);
+  overflow: hidden;
+  transition: width var(--transition-base);
+
+  &--expanded {
+    flex-shrink: 1;
+    width: 32rem;
+  }
+}
+
+.header__search-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
 }
 
 .header__search-icon {
@@ -71,11 +66,16 @@
 
 .header__search-input {
   flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding-right: var(--space-16);
   border: none;
   background: transparent;
   color: var(--color-text-primary);
   font-family: var(--font-family);
   font-size: var(--text-md);
+  opacity: 0;
+  transition: opacity var(--transition-base);
 
   &::placeholder {
     color: var(--color-text-muted);
@@ -86,11 +86,92 @@
   }
 }
 
+.header__search--expanded .header__search-input {
+  opacity: 1;
+}
+
+// Rewards hides below tablet width so the search + auth + language cluster
+// never overflows a small phone screen.
+.header__icon-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: var(--space-8);
+  height: 4rem;
+  padding: 1rem 0.8rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-promo);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--text-md);
+  font-weight: 500;
+  transition: filter var(--transition-base);
+
+  &:hover {
+    filter: brightness(1.15);
+  }
+
+  @include screen-from($screen-tablet) {
+    display: inline-flex;
+  }
+}
+
+.header__icon-btn-icon {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+}
+
+.header__icon-btn-label {
+  white-space: nowrap;
+}
+
 .header__right {
   display: flex;
   align-items: center;
   gap: var(--space-12);
   margin-left: auto;
+  flex-shrink: 0;
+}
+
+// Language + settings live together in one 40px-tall row with a divider,
+// each control sized to the 24x24 spec instead of the larger square buttons.
+.header__utility {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 4rem;
+}
+
+.header__utility-divider {
+  width: 1px;
+  height: 1.6rem;
+  background-color: var(--color-border-subtle);
+}
+
+.header__utility-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-bg-primary);
+  transition: filter var(--transition-base);
+
+  &:hover {
+    filter: brightness(1.15);
+  }
+}
+
+.header__utility-icon {
+  display: block;
+  width: 1.4rem;
+  height: 1.4rem;
   flex-shrink: 0;
 }
 
@@ -104,7 +185,8 @@
   cursor: pointer;
   transition:
     background-color var(--transition-base),
-    border-color var(--transition-base);
+    border-color var(--transition-base),
+    filter var(--transition-base);
 
   &--primary {
     background-color: var(--color-accent);
@@ -116,13 +198,11 @@
   }
 
   &--secondary {
-    background-color: transparent;
-    color: var(--color-text-primary);
-    border-color: var(--color-border-subtle);
+    background-color: var(--color-text-primary);
+    color: var(--color-bg-primary);
 
     &:hover {
-      border-color: var(--color-border);
-      background-color: rgba(255, 155, 4, 0.1);
+      filter: brightness(0.92);
     }
   }
 }

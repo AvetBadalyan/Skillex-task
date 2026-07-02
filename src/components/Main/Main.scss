@@ -51,11 +51,11 @@
   @include screen-from($screen-desktop) {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   }
-}
 
-.main__grid--featured {
-  @include screen-from($screen-tablet) {
-    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  &--featured {
+    @include screen-from($screen-tablet) {
+      grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+    }
   }
 }
 
@@ -73,7 +73,7 @@
     transform var(--transition-base);
 
   &:hover {
-    background-color: rgba(255, 155, 4, 0.15);
+    background-color: rgba(var(--color-accent-rgb), 0.15);
     transform: translateY(-0.4rem);
   }
 
@@ -86,7 +86,7 @@
   width: 100%;
   padding-top: 100%;
   position: relative;
-  background: linear-gradient(135deg, #ff9b04 0%, #ff7200 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, #ff7200 100%);
   border-radius: var(--radius-md);
   overflow: hidden;
 }

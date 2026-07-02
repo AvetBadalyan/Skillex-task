@@ -29,6 +29,7 @@
     height: 100dvh;
     border-top: none;
     border-right: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sidebar);
     transform: none;
     flex-shrink: 0;
     transition: width var(--transition-sidebar);
@@ -46,9 +47,55 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  gap: var(--space-12);
 
   @include screen-from($screen-desktop) {
     border-bottom: none;
+  }
+}
+
+.sidebar__logo {
+  display: block;
+  width: 12.9rem;
+  height: auto;
+  max-width: 100%;
+}
+
+.sidebar__logo-mark {
+  display: none;
+  width: 2rem;
+  height: auto;
+}
+
+// The "--open" modifier is applied by the same toggle button at every screen
+// size, but each breakpoint has a different default to toggle away from: on
+// mobile the sidebar is an off-canvas drawer that starts hidden (open = shown),
+// while on desktop it's a persistent rail that starts full-width (open =
+// collapsed to icons only). One button, two meanings by design.
+//
+// Collapsed rail is 7.2rem (72px) wide; 1.2rem (12px) padding on every side
+// leaves exactly 4.8rem (48px) of content — which is exactly the size of
+// each icon square below, so it sits flush with no leftover asymmetric gap.
+@include screen-from($screen-desktop) {
+  .sidebar--open .sidebar__header {
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-12);
+  }
+
+  // The full wordmark can't shrink to 48px and stay legible, so it swaps for
+  // the "L" mark (one of the logo's own letterform paths, cropped) instead.
+  .sidebar--open .sidebar__logo {
+    display: none;
+  }
+
+  .sidebar--open .sidebar__logo-mark {
+    display: block;
+  }
+
+  .sidebar--open .sidebar__toggle {
+    width: 4.8rem;
+    height: 4.8rem;
   }
 }
 
@@ -72,16 +119,88 @@
     border-color: var(--color-border);
     filter: brightness(1.15);
   }
-
-  @include screen-from($screen-desktop) {
-    // Optional: adjust styling on desktop if needed
-  }
 }
 
 .sidebar__toggle-icon {
   display: block;
   width: 2rem;
   height: 2rem;
+}
+
+// Quick-switch tabs above the main nav. Same collapse technique as the nav
+// labels below: max-width (not visibility) collapses the label's box so the
+// icon can center in the rail with no leftover label-shaped gap.
+.sidebar__tabs {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-16);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sidebar__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  flex: 1;
+  height: 4rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+  background: radial-gradient(120% 120% at 0% 0%, #2a2828 0%, #4e4b4b 100%);
+  color: var(--color-text-primary);
+  transition:
+    opacity var(--transition-base),
+    gap var(--transition-sidebar);
+
+  &--active {
+    background: radial-gradient(120% 120% at 0% 0%, #7a2e0e 0%, #b54708 100%);
+    opacity: 0.9;
+  }
+}
+
+.sidebar__tab-icon {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+}
+
+.sidebar__tab-label {
+  font-size: var(--text-md);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 1;
+  max-width: 10rem;
+  transition:
+    opacity var(--transition-sidebar),
+    max-width var(--transition-sidebar);
+}
+
+@include screen-from($screen-desktop) {
+  .sidebar--open .sidebar__tabs {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-12);
+    padding: var(--space-12);
+  }
+
+  .sidebar--open .sidebar__tab {
+    flex: none;
+    width: 4.8rem;
+    height: 4.8rem;
+    // A zero-width label is still a flex item, and "gap" inserts space
+    // between every item regardless of size — without zeroing it too, the
+    // icon sits off-center by half the gap even though the label is invisible.
+    gap: 0;
+  }
+
+  .sidebar--open .sidebar__tab-label {
+    opacity: 0;
+    max-width: 0;
+  }
 }
 
 .sidebar__nav {
@@ -106,16 +225,19 @@
 .sidebar__menu-link {
   display: flex;
   align-items: center;
-  gap: var(--space-12);
+  gap: var(--space-16);
   flex: 1;
-  padding: var(--space-12);
+  padding: var(--space-6) var(--space-16);
   border-radius: var(--radius-md);
   text-decoration: none;
   color: var(--color-text-primary);
-  transition: background-color var(--transition-base);
+  background-color: var(--color-bg-nav-item);
+  transition:
+    background-color var(--transition-base),
+    gap var(--transition-sidebar);
 
   &:hover {
-    background-color: rgba(255, 155, 4, 0.1);
+    background-color: rgba(var(--color-accent-rgb), 0.1);
   }
 
   &:active {
@@ -137,13 +259,46 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  opacity: 1;
+  max-width: 16rem;
+  transition:
+    opacity var(--transition-sidebar),
+    max-width var(--transition-sidebar);
 }
 
 @include screen-from($screen-desktop) {
+  .sidebar--open .sidebar__nav {
+    padding: var(--space-12);
+  }
+
+  // A collapsed nav item becomes a centered 48x48 square: the item itself
+  // still spans the full rail width (stretched by the column-flex parent),
+  // so both the item and the link need justify-content:center, and the link
+  // needs an explicit fixed size instead of flex:1 (which would otherwise
+  // stretch it back out to the rail's full width).
+  .sidebar--open .sidebar__menu-item {
+    justify-content: center;
+  }
+
+  .sidebar--open .sidebar__menu-link {
+    flex: none;
+    width: 4.8rem;
+    height: 4.8rem;
+    justify-content: center;
+    // A zero-width label is still a flex item, and "gap" inserts space
+    // between every item regardless of size — without zeroing it too, the
+    // icon sits off-center by half the gap even though the label is invisible.
+    gap: 0;
+    // --color-bg-nav-item is only ~3 shades off the sidebar's own background,
+    // so at icon-only size (no label to give the row visual weight) it read
+    // as "no button at all". Swap to the same visible chip color used by the
+    // toggle and theme buttons so every collapsed icon looks consistent.
+    background-color: var(--color-bg-control);
+  }
+
   .sidebar--open .sidebar__menu-label {
-    visibility: hidden;
     opacity: 0;
-    transition: opacity var(--transition-sidebar);
+    max-width: 0;
   }
 }
 
@@ -151,4 +306,91 @@
   flex-shrink: 0;
   padding: var(--space-12) var(--space-16);
   border-top: 1px solid var(--color-border);
+}
+
+.sidebar__theme {
+  display: flex;
+  gap: var(--space-8);
+  padding: var(--space-8);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-primary);
+}
+
+.sidebar__theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  flex: 1;
+  height: 3.6rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  transition:
+    background-color var(--transition-base),
+    gap var(--transition-sidebar);
+
+  // The active state reuses the same neutral control color as other
+  // pressed/selected chrome in the app (not the orange accent, which is
+  // reserved for primary calls to action).
+  &--active {
+    background-color: var(--color-bg-control);
+  }
+}
+
+.sidebar__theme-icon {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+}
+
+.sidebar__theme-label {
+  font-size: var(--text-md);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 1;
+  max-width: 8rem;
+  transition:
+    opacity var(--transition-sidebar),
+    max-width var(--transition-sidebar);
+}
+
+@include screen-from($screen-desktop) {
+  .sidebar--open .sidebar__footer {
+    padding: var(--space-12);
+  }
+
+  // The wrapper's own padding/border only make sense when it's framing two
+  // side-by-side buttons that share the rail's full width. Collapsed, each
+  // button already IS a 48px chip on its own — keeping the wrapper's padding
+  // would leave no room for a 48px button inside 48px of available space, so
+  // the wrapper goes chromeless and just stacks the two chips directly.
+  .sidebar--open .sidebar__theme {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-12);
+    padding: 0;
+    border: none;
+    background-color: transparent;
+  }
+
+  .sidebar--open .sidebar__theme-btn {
+    flex: none;
+    width: 4.8rem;
+    height: 4.8rem;
+    gap: 0;
+    background-color: var(--color-bg-control);
+  }
+
+  .sidebar--open .sidebar__theme-btn--active {
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary);
+  }
+
+  .sidebar--open .sidebar__theme-label {
+    opacity: 0;
+    max-width: 0;
+  }
 }
