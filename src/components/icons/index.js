@@ -19,3 +19,4 @@ export { default as IconTwitter } from './IconTwitter';
 export { default as IconViber } from './IconViber';
 export { default as IconSun } from './IconSun';
 export { default as IconMoon } from './IconMoon';
+export { default as IconLogo } from './IconLogo';

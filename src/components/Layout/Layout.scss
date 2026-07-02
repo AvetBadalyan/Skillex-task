@@ -4,12 +4,13 @@
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
+  padding-bottom: 6.4rem;
 
-  // On desktop the shell fills the screen and scrolling moves inside the content.
   @include screen-from($screen-desktop) {
     flex-direction: row;
     height: 100dvh;
     overflow: hidden;
+    padding-bottom: 0;
   }
 }
 
@@ -33,27 +34,5 @@
   @include screen-from($screen-desktop) {
     overflow-y: auto;
     overscroll-behavior: contain;
-  }
-}
-
-.layout__backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-overlay);
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity var(--transition-sidebar),
-    visibility var(--transition-sidebar);
-
-  &--visible {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  // The sidebar is part of the layout on desktop, so no backdrop is needed.
-  @include screen-from($screen-desktop) {
-    display: none;
   }
 }

@@ -8,3 +8,114 @@
     padding: var(--space-32);
   }
 }
+
+.main__section {
+  margin-bottom: var(--space-32);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.main__section-header {
+  margin-bottom: var(--space-20);
+}
+
+.main__section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  margin: 0;
+  font-size: var(--heading-04);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.main__section-icon {
+  display: block;
+  width: 2.4rem;
+  height: 2.4rem;
+  flex-shrink: 0;
+}
+
+.main__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-16);
+
+  @include screen-from($screen-tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: var(--space-20);
+  }
+
+  @include screen-from($screen-desktop) {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+}
+
+.main__grid--featured {
+  @include screen-from($screen-tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  }
+}
+
+.main__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-12);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-card);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    background-color var(--transition-base),
+    transform var(--transition-base);
+
+  &:hover {
+    background-color: rgba(255, 155, 4, 0.15);
+    transform: translateY(-0.4rem);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.main__card-image {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  background: linear-gradient(135deg, #ff9b04 0%, #ff7200 100%);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.main__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.main__card-title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: var(--lh-lg);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.main__card-subtitle {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--lh-sm);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

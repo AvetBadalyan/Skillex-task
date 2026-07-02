@@ -1,24 +1,30 @@
 import './Header.scss';
-import { IconMenu } from '../icons';
+import { IconLogo, IconSearch } from '../icons';
 
-function Header({ onToggleSidebar }) {
+function Header() {
   return (
     <header className="header">
       <div className="header__left">
-        <button
-          type="button"
-          className="header__menu-toggle"
-          onClick={onToggleSidebar}
-          aria-label="Toggle sidebar"
-        >
-          <IconMenu className="header__menu-icon" />
-        </button>
-        {/* logo / badge */}
+        <div className="header__logo">
+          <IconLogo className="header__logo-icon" />
+        </div>
       </div>
 
-      <div className="header__center">{/* search */}</div>
+      <div className="header__center">
+        <div className="header__search">
+          <IconSearch className="header__search-icon" />
+          <input
+            type="text"
+            className="header__search-input"
+            placeholder="Search songs, artists, playlists..."
+          />
+        </div>
+      </div>
 
-      <div className="header__right">{/* auth, language, theme */}</div>
+      <div className="header__right">
+        <button className="header__btn header__btn--secondary">Sign In</button>
+        <button className="header__btn header__btn--primary">Sign Up</button>
+      </div>
     </header>
   );
 }

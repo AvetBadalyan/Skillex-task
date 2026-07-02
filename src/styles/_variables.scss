@@ -14,8 +14,8 @@
 
   /* Borders */
   --color-border: #393737;
-  --color-border-subtle: rgba(255, 255, 255, 0.15); /* quaternary/border 15% */
-  --color-border-input: rgba(255, 255, 255, 0.25); /* transparent/06 (search) */
+  --color-border-subtle: rgba(255, 255, 255, 0.15);
+  --color-border-input: rgba(255, 255, 255, 0.25);
   --color-border-header: rgba(255, 255, 255, 0.03);
 
   /* Shadow */
@@ -41,18 +41,20 @@
   --radius-md: 0.8rem;
   --radius-lg: 1.2rem;
 
-  /* Typography */
+  /* Typography — font sizes (1rem = 10px) */
   --font-family: 'Inter', system-ui, sans-serif;
 
-  --text-sm: 1.2rem;
-  --text-md: 1.4rem;
-  --text-lg: 1.6rem;
-  --heading-04: 2.4rem;
+  --text-sm: 1.2rem;       /* 12px — small text, captions */
+  --text-md: 1.4rem;       /* 14px — body text, labels */
+  --text-base: 1.6rem;     /* 16px — normal body text */
+  --text-lg: 1.8rem;       /* 18px — card titles, emphasis */
+  --heading-04: 2.4rem;    /* 24px — section headings */
 
-  --lh-sm: 1.6rem;
-  --lh-md: 2rem;
-  --lh-lg: 2.4rem;
-  --lh-heading-04: 3.2rem;
+  /* Line heights */
+  --lh-sm: 1.6rem;         /* 16px */
+  --lh-md: 2rem;           /* 20px */
+  --lh-lg: 2.4rem;         /* 24px */
+  --lh-heading-04: 3.2rem; /* 32px */
 
   /* Transitions */
   --transition-base: 200ms ease;
