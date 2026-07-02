@@ -1,3 +1,21 @@
 // Barrel export for all SVG icons.
-// Import like: import { IconMenu } from '../icons';
+// Import like: import { IconMenu, IconHome } from '../icons';
 export { default as IconMenu } from './IconMenu';
+export { default as IconHome } from './IconHome';
+export { default as IconFire } from './IconFire';
+export { default as IconSearch } from './IconSearch';
+export { default as IconPresent } from './IconPresent';
+export { default as IconSettings } from './IconSettings';
+export { default as IconPrize } from './IconPrize';
+export { default as IconCrown } from './IconCrown';
+export { default as IconHomeLine } from './IconHomeLine';
+export { default as IconCircle } from './IconCircle';
+export { default as IconChevronLeft } from './IconChevronLeft';
+export { default as IconChevronRight } from './IconChevronRight';
+export { default as IconChevronDown } from './IconChevronDown';
+export { default as IconTelegram } from './IconTelegram';
+export { default as IconLinkedin } from './IconLinkedin';
+export { default as IconTwitter } from './IconTwitter';
+export { default as IconViber } from './IconViber';
+export { default as IconSun } from './IconSun';
+export { default as IconMoon } from './IconMoon';
