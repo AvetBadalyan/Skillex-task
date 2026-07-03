@@ -6,7 +6,6 @@
   overflow: hidden;
   border-radius: var(--radius-lg);
   background-color: var(--color-bg-card);
-  margin-bottom: var(--space-32);
   aspect-ratio: 300 / 120; // Figma mobile hero frame
 
   @include screen-from($screen-tablet) {
