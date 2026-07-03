@@ -3,7 +3,6 @@
 $screen-tablet: 768px;
 $screen-desktop: 1024px;
 
-// Apply styles from the given screen size and up.
 @mixin screen-from($size) {
   @media (min-width: $size) {
     @content;

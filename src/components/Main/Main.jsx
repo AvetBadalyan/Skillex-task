@@ -1,5 +1,6 @@
 import './Main.scss';
 import { IconFire, IconCrown } from '../icons';
+import Slideshow from '../Slideshow/Slideshow';
 
 const FEATURED_SECTION = {
   title: 'New & Hot',
@@ -26,6 +27,8 @@ const TRENDING_SECTION = {
 function Main() {
   return (
     <main className="main">
+      <Slideshow />
+
       <section className="main__section">
         <div className="main__section-header">
           <h2 className="main__section-title">

@@ -1,0 +1,96 @@
+@use '../../styles/breakpoints' as *;
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-card);
+  margin-bottom: var(--space-32);
+  aspect-ratio: 300 / 120; // Figma mobile hero frame
+
+  @include screen-from($screen-tablet) {
+    aspect-ratio: 2 / 1;
+  }
+
+  @include screen-from($screen-desktop) {
+    // Figma's hero banner is 1160x387 with the sidebar full-width and
+    // 1328x443 collapsed to a rail — same ~3:1 ratio both times, so this
+    // needs to stay a ratio rather than a fixed height.
+    aspect-ratio: 1160 / 387;
+  }
+}
+
+.slideshow__track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform var(--transition-sidebar);
+}
+
+.slideshow__slide {
+  flex: 1 0 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.slideshow__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+// A tab growing out of the slideshow's bottom edge. The concave corners are
+// a real vector path (see Slideshow.jsx) rather than a border-radius/
+// box-shadow trick — those can't guarantee the curve is tangent to the
+// straight edge it meets, so they tend to show a slight kink.
+.slideshow__dots {
+  position: absolute;
+  left: 2.4rem;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  // ~29px/10px padding, from Figma's outer shape (176x29) minus its inner
+  // content row (117.93x9.43). Kept as whole pixels on purpose — a
+  // fractional box size lets this element and its svg child round to
+  // different device pixels at some zoom levels, leaving a hairline gap.
+  padding: 1rem 2.8rem;
+  color: var(--color-bg-primary);
+}
+
+.slideshow__dots-shape {
+  position: absolute;
+  inset: 0;
+  // An absolutely-positioned svg with an intrinsic aspect ratio (from
+  // viewBox) can fall back to preserving that ratio instead of stretching
+  // to fill, even with inset:0 on every side — explicit width/height forces
+  // the stretch so it actually matches its container's real box.
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.slideshow__dot {
+  position: relative; // both positioned + z-index:auto, so DOM order wins: this paints above the shape svg
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 0;
+  cursor: pointer;
+  transition:
+    width var(--transition-base),
+    border-color var(--transition-base);
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+
+  &--active {
+    width: 3.6rem;
+    border-color: #ffffff;
+  }
+}

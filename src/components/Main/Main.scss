@@ -2,10 +2,10 @@
 
 .main {
   flex: 1;
-  padding: var(--space-16);
+  padding: var(--space-10);
 
   @include screen-from($screen-tablet) {
-    padding: var(--space-32);
+    padding: var(--space-20);
   }
 }
 

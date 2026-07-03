@@ -19,7 +19,6 @@
     transform: translateY(0);
   }
 
-  // On desktop the sidebar is part of the layout and positioned on the left side.
   @include screen-from($screen-desktop) {
     position: static;
     bottom: auto;
