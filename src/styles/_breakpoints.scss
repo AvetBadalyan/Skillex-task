@@ -1,5 +1,4 @@
-// Screen sizes used for responsive (mobile-first) styles.
-// SCSS variables are required here because media queries can't read CSS custom properties.
+// SCSS variables, not CSS custom properties, because media queries can't read the latter.
 $screen-tablet: 768px;
 $screen-desktop: 1024px;
 

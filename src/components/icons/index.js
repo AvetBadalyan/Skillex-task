@@ -1,5 +1,3 @@
-// Barrel export for all SVG icons.
-// Import like: import { IconMenu, IconHome } from '../icons';
 export { default as IconMenu } from './IconMenu';
 export { default as IconHome } from './IconHome';
 export { default as IconFire } from './IconFire';
