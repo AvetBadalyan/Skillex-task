@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as *;
+
 .section-header {
   display: flex;
   align-items: center;
@@ -21,8 +23,11 @@
   gap: var(--space-4);
 }
 
+// Figma's mobile heading rows show only "View All" — swipe already scrolls
+// the row, so the chevrons are a desktop/mouse-only convenience and only
+// appear from tablet up.
 .section-header__chevron {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   width: 3.6rem;
@@ -37,6 +42,10 @@
 
   &:hover {
     background-color: rgba(var(--color-accent-rgb), 0.15);
+  }
+
+  @include screen-from($screen-tablet) {
+    display: flex;
   }
 }
 

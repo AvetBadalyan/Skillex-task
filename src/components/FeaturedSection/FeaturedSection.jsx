@@ -1,19 +1,10 @@
-import { useRef } from 'react';
 import './FeaturedSection.scss';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import { FEATURED_PLAYLISTS, NEW_RELEASES } from '../../constants/featured';
 
 function FeaturedSection() {
-  const releasesRef = useRef(null);
-
-  const scrollReleases = (direction) => {
-    const node = releasesRef.current;
-    if (!node) return;
-    node.scrollBy({
-      left: direction * node.clientWidth * 0.8,
-      behavior: 'smooth',
-    });
-  };
+  const [releasesRef, scrollReleases] = useHorizontalScroll();
 
   return (
     <section className="featured">

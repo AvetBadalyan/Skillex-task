@@ -1,0 +1,74 @@
+@use '../../styles/breakpoints' as *;
+
+.artists {
+  display: flex;
+  flex-direction: column;
+}
+
+.artists__list {
+  display: flex;
+  gap: var(--space-8);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include screen-from($screen-tablet) {
+    gap: var(--space-12);
+  }
+}
+
+.artists__item {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--space-8);
+  width: 12.9rem;
+  scroll-snap-align: start;
+  text-decoration: none;
+
+  @include screen-from($screen-tablet) {
+    width: 14.8rem;
+  }
+}
+
+.artists__portrait {
+  display: block;
+  width: 100%;
+  // Same 148x208.46 Figma slot as the New Releases cards — rounds to the
+  // same ~1.41 ratio, so this reuses that aspect-ratio and cover treatment
+  // rather than the fractional source value.
+  aspect-ratio: 148 / 208;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-card);
+  object-fit: cover;
+  // Most source photos are headshots or group shots framed for a landscape
+  // crop; anchoring to the top keeps faces in frame once `cover` crops the
+  // sides down to this card's portrait shape.
+  object-position: top;
+}
+
+.artists__name {
+  display: block;
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: var(--lh-md);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artists__listeners {
+  display: block;
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

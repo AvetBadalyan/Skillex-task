@@ -1,19 +1,10 @@
-import { useRef } from 'react';
 import './LabelsSection.scss';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import { PARTNER_LABELS } from '../../constants/labels';
 
 function LabelsSection() {
-  const trackRef = useRef(null);
-
-  const scroll = (direction) => {
-    const node = trackRef.current;
-    if (!node) return;
-    node.scrollBy({
-      left: direction * node.clientWidth * 0.8,
-      behavior: 'smooth',
-    });
-  };
+  const [trackRef, scroll] = useHorizontalScroll();
 
   return (
     <section className="labels">
