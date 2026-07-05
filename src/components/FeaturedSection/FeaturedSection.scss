@@ -1,0 +1,127 @@
+@use '../../styles/breakpoints' as *;
+
+.featured {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+.featured__releases {
+  display: flex;
+  gap: var(--space-16);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.featured__release {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--space-8);
+  width: 12.9rem;
+  scroll-snap-align: start;
+  text-decoration: none;
+
+  @include screen-from($screen-tablet) {
+    width: 14.8rem;
+  }
+}
+
+.featured__release-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 148 / 208; // Figma card ratio, held across the 129px mobile width too
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-card);
+  object-fit: cover;
+}
+
+.featured__release-title {
+  display: block;
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: var(--lh-md);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.featured__release-artist {
+  display: block;
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.featured__playlists {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+
+  @include screen-from($screen-tablet) {
+    flex-direction: row;
+  }
+}
+
+.featured__playlist {
+  position: relative;
+  display: block;
+  width: 100%;
+  // Figma gives this card as 572x222 with the sidebar open and 656x263
+  // collapsed — same ~2.58 ratio either way, so a fluid width (from the
+  // `.main` flex item growing when the sidebar rail shrinks) plus a fixed
+  // aspect-ratio reproduces both sizes without reading sidebar state here,
+  // same technique Slideshow uses for its own sidebar-dependent sizing.
+  aspect-ratio: 572 / 222;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+
+  @include screen-from($screen-tablet) {
+    flex: 1 1 0;
+  }
+}
+
+.featured__playlist-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured__playlist-info {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-16);
+  background: linear-gradient(
+    to top,
+    rgba(13, 12, 12, 0.85),
+    rgba(13, 12, 12, 0)
+  );
+}
+
+.featured__playlist-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.featured__playlist-subtitle {
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  color: var(--color-text-muted);
+}

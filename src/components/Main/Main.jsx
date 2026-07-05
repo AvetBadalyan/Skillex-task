@@ -3,6 +3,7 @@ import './Main.scss';
 import Slideshow from '../Slideshow/Slideshow';
 import TopCharts from '../TopCharts/TopCharts';
 import FilterBar from '../FilterBar/FilterBar';
+import FeaturedSection from '../FeaturedSection/FeaturedSection';
 import { ALL_ID } from '../../constants/catalog';
 
 function Main() {
@@ -34,6 +35,7 @@ function Main() {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
       />
+      <FeaturedSection />
     </main>
   );
 }
