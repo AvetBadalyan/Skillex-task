@@ -4,6 +4,7 @@ import Slideshow from '../Slideshow/Slideshow';
 import TopCharts from '../TopCharts/TopCharts';
 import FilterBar from '../FilterBar/FilterBar';
 import FeaturedSection from '../FeaturedSection/FeaturedSection';
+import LabelsSection from '../LabelsSection/LabelsSection';
 import { ALL_ID } from '../../constants/catalog';
 
 function Main() {
@@ -36,6 +37,7 @@ function Main() {
         onSearchChange={setSearchQuery}
       />
       <FeaturedSection />
+      <LabelsSection />
     </main>
   );
 }

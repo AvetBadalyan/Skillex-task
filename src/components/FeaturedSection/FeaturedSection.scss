@@ -3,12 +3,12 @@
 .featured {
   display: flex;
   flex-direction: column;
-  gap: var(--space-20);
 }
 
 .featured__releases {
   display: flex;
   gap: var(--space-16);
+  margin-bottom: var(--space-32);
   overflow-x: auto;
   scroll-snap-type: x proximity;
   scrollbar-width: none;
@@ -16,6 +16,10 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @include screen-from($screen-tablet) {
+    margin-bottom: var(--space-48);
   }
 }
 
