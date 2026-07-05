@@ -19,7 +19,7 @@ function ArtistsSection() {
           <a href="#" key={artist.id} className="artists__item">
             <img
               src={artist.photo}
-              alt={artist.name}
+              alt=""
               className="artists__portrait"
               loading="lazy"
             />

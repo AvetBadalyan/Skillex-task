@@ -39,8 +39,12 @@ function Header() {
       </div>
 
       <div className="header__right">
-        <button className="header__btn header__btn--secondary">Sign In</button>
-        <button className="header__btn header__btn--primary">Sign Up</button>
+        <button type="button" className="header__btn header__btn--secondary">
+          Sign In
+        </button>
+        <button type="button" className="header__btn header__btn--primary">
+          Sign Up
+        </button>
         <div className="header__utility">
           <LanguageSelector compact />
           <span className="header__utility-divider" aria-hidden="true" />

@@ -1,5 +1,10 @@
 import './FilterBar.scss';
-import { IconHomeLine, IconChevronDown, IconSearch } from '../icons';
+import {
+  IconHomeLine,
+  IconCircle,
+  IconChevronDown,
+  IconSearch,
+} from '../icons';
 import { FORMATS, CATEGORIES_BY_FORMAT, ALL_ID } from '../../constants/catalog';
 
 function FilterBar({
@@ -54,7 +59,7 @@ function FilterBar({
             {category.id === ALL_ID ? (
               <IconHomeLine className="filter-bar__tab-icon" />
             ) : (
-              <span className="filter-bar__tab-dot" aria-hidden="true" />
+              <IconCircle className="filter-bar__tab-dot" />
             )}
             {category.label}
           </button>

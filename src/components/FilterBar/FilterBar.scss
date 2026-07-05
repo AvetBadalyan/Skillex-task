@@ -1,4 +1,5 @@
 @use '../../styles/breakpoints' as *;
+@use '../../styles/mixins' as *;
 
 // Narrow (phone/tablet): everything stacks in a column — search, then the
 // "Items" dropdown, then the scrollable tabs. From the tablet breakpoint up:
@@ -21,12 +22,8 @@
   align-items: center;
   gap: var(--space-6);
   overflow-x: auto;
-  scrollbar-width: none;
   order: 3;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  @include hide-scrollbar;
 
   @include screen-from($screen-tablet) {
     order: 2;
@@ -78,12 +75,9 @@
   width: 1.6rem;
   height: 1.6rem;
   flex-shrink: 0;
-  // currentColor, not a hardcoded color, so it darkens along with the tab's
-  // text when the tab goes active — same behavior the icon already gets for
-  // free from its own fill="currentColor".
-  border: 2px solid currentColor;
-  border-radius: 50%;
-  box-sizing: border-box;
+  // stroke="currentColor" on the icon itself, so it darkens along with the
+  // tab's text when the tab goes active — same behavior the home icon
+  // already gets for free from its own fill="currentColor".
 }
 
 .filter-bar__select {

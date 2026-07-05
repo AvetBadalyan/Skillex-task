@@ -1,5 +1,5 @@
 import './TopCharts.scss';
-import { IconCrown } from '../icons';
+import { IconPrize, IconCrown } from '../icons';
 import { CATALOG_ITEMS, ALL_ID } from '../../constants/catalog';
 
 function TopCharts({ activeFormat, activeCategory, searchQuery }) {
@@ -15,7 +15,7 @@ function TopCharts({ activeFormat, activeCategory, searchQuery }) {
   return (
     <section className="top-charts">
       <h2 className="top-charts__title">
-        <IconCrown className="top-charts__title-icon" />
+        <IconPrize className="top-charts__title-icon" />
         Top Charts
       </h2>
       <div className="top-charts__list">

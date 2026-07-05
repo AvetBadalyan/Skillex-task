@@ -10,7 +10,6 @@ function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen((open) => !open);
-  const closeSidebar = () => setIsSidebarOpen(false);
 
 
   return (

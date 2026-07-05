@@ -146,6 +146,8 @@
   height: 4rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border-subtle);
+  // Figma's gray/02 -> gray/04, a one-off pairing not used anywhere else,
+  // so left inline rather than adding two more single-use variables.
   background: radial-gradient(120% 120% at 0% 0%, #2a2828 0%, #4e4b4b 100%);
   color: var(--color-text-primary);
   transition:
@@ -153,7 +155,11 @@
     gap var(--transition-sidebar);
 
   &--active {
-    background: radial-gradient(120% 120% at 0% 0%, #7a2e0e 0%, #b54708 100%);
+    background: radial-gradient(
+      120% 120% at 0% 0%,
+      var(--color-warning-start) 0%,
+      var(--color-warning-end) 100%
+    );
     opacity: 0.9;
   }
 }

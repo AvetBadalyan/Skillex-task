@@ -12,6 +12,11 @@
     255, 155, 4; /* same value as --color-accent, as R, G, B channels for rgba() tints */
   --color-bg-promo: #5738ad;
 
+  /* Figma's "warning" family — a separate token group from --color-accent,
+     used only for the sidebar's active Home-tab gradient. */
+  --color-warning-start: #7a2e0e; /* warning/02 */
+  --color-warning-end: #b54708; /* warning/04 */
+
   --color-text-primary: #fafafa;
   --color-text-muted: #c4c0c0;
 

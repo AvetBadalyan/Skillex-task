@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import './Footer.scss';
-import { IconTelegram, IconLinkedin, IconTwitter, IconViber, IconChevronDown, IconLogo } from '../icons';
+import {
+  IconTelegram,
+  IconLinkedin,
+  IconTwitter,
+  IconViber,
+  IconChevronDown,
+  IconLogo,
+} from '../icons';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import visaLogo from '../../assets/payment/visa.svg';
 import mastercardLogo from '../../assets/payment/mastercard.svg';
@@ -50,6 +57,8 @@ const PAYMENT_METHODS = [
   { name: 'AstroPay', logo: astropayLogo },
 ];
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 function Footer() {
   const [openSections, setOpenSections] = useState(() => new Set());
 
@@ -93,7 +102,7 @@ function Footer() {
                   </button>
                   <ul className="footer__section-list">
                     {section.links.map((link) => (
-                      <li key={link}>
+                      <li key={`${section.title}-${link}`}>
                         <a href="#" className="footer__link">
                           {link}
                         </a>
@@ -129,22 +138,29 @@ function Footer() {
               src={method.logo}
               alt={method.name}
               className="footer__payment-logo"
+              loading="lazy"
             />
           ))}
         </div>
 
         <div className="footer__legal">
           <div className="footer__legal-text">
-            <p className="footer__copyright">© 2024 Skillex. All rights reserved.</p>
+            <p className="footer__copyright">
+              © {CURRENT_YEAR} Skillex. All rights reserved.
+            </p>
             <p className="footer__disclaimer">
-              Skillex is a demo streaming layout, not a licensed music service — every track,
-              artist, and playlist shown here is placeholder content for testing the grid and
-              typography against real-world text lengths. Play counts, follower totals, and cover
-              art are illustrative only. Swap in a real catalog and the layout keeps its shape. No
-              account is required to browse this preview.
+              Skillex is a demo streaming layout, not a licensed music service —
+              every track, artist, and playlist shown here is placeholder
+              content for testing the grid and typography against real-world
+              text lengths. Play counts, follower totals, and cover art are
+              illustrative only. Swap in a real catalog and the layout keeps its
+              shape. No account is required to browse this preview.
             </p>
           </div>
-          <span className="footer__age-badge" aria-label="Age restricted 18 plus">
+          <span
+            className="footer__age-badge"
+            aria-label="Age restricted 18 plus"
+          >
             18+
           </span>
         </div>

@@ -1,4 +1,5 @@
 @use '../../styles/breakpoints' as *;
+@use '../../styles/mixins' as *;
 
 .top-charts__title {
   display: flex;
@@ -12,8 +13,8 @@
 
 .top-charts__title-icon {
   display: block;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 3.2rem;
+  height: 3.2rem;
   flex-shrink: 0;
 }
 
@@ -27,12 +28,7 @@
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-md);
   overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  @include hide-scrollbar;
 
   @include screen-from($screen-tablet) {
     gap: var(--space-8);
