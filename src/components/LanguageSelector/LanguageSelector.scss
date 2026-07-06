@@ -8,7 +8,7 @@
   align-items: center;
   gap: var(--space-6);
   height: 4rem;
-  padding: var(--space-6);
+  padding: var(--space-8) var(--space-6);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   background-color: var(--color-bg-sidebar);
@@ -42,8 +42,8 @@
 
 .language-selector__flag-icon {
   display: block;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2.4rem;
+  height: 2.4rem;
   flex-shrink: 0;
   border-radius: 50%;
 }
@@ -63,8 +63,8 @@
 
 .language-selector__chevron {
   display: block;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 2rem;
+  height: 2rem;
   flex-shrink: 0;
   color: var(--color-text-muted);
 }

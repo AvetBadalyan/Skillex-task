@@ -7,6 +7,8 @@ import {
   IconViber,
   IconChevronDown,
   IconLogo,
+  IconAgeBadge,
+  IconArrowUp,
 } from '../icons';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import visaLogo from '../../assets/payment/visa.svg';
@@ -57,8 +59,6 @@ const PAYMENT_METHODS = [
   { name: 'AstroPay', logo: astropayLogo },
 ];
 
-const CURRENT_YEAR = new Date().getFullYear();
-
 function Footer() {
   const [openSections, setOpenSections] = useState(() => new Set());
 
@@ -72,6 +72,10 @@ function Footer() {
       }
       return next;
     });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -137,7 +141,11 @@ function Footer() {
               key={method.name}
               src={method.logo}
               alt={method.name}
-              className="footer__payment-logo"
+              className={`footer__payment-logo${
+                method.name === 'Mastercard'
+                  ? ' footer__payment-logo--emblem'
+                  : ''
+              }`}
               loading="lazy"
             />
           ))}
@@ -145,9 +153,6 @@ function Footer() {
 
         <div className="footer__legal">
           <div className="footer__legal-text">
-            <p className="footer__copyright">
-              © {CURRENT_YEAR} Skillex. All rights reserved.
-            </p>
             <p className="footer__disclaimer">
               Skillex is a demo streaming layout, not a licensed music service —
               every track, artist, and playlist shown here is placeholder
@@ -157,12 +162,23 @@ function Footer() {
               shape. No account is required to browse this preview.
             </p>
           </div>
-          <span
-            className="footer__age-badge"
-            aria-label="Age restricted 18 plus"
-          >
-            18+
-          </span>
+          <div className="footer__legal-actions">
+            <span
+              className="footer__age-badge"
+              role="img"
+              aria-label="Age restricted 18 plus"
+            >
+              <IconAgeBadge className="footer__age-badge-icon" />
+            </span>
+            <button
+              type="button"
+              className="footer__scroll-top"
+              onClick={scrollToTop}
+              aria-label="Scroll to top"
+            >
+              <IconArrowUp className="footer__scroll-top-icon" />
+            </button>
+          </div>
         </div>
       </div>
     </footer>

@@ -18,3 +18,5 @@ export { default as IconViber } from './IconViber';
 export { default as IconSun } from './IconSun';
 export { default as IconMoon } from './IconMoon';
 export { default as IconLogo } from './IconLogo';
+export { default as IconAgeBadge } from './IconAgeBadge';
+export { default as IconArrowUp } from './IconArrowUp';

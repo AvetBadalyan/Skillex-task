@@ -12,7 +12,7 @@
   margin: 0;
   font-size: var(--heading-04);
   font-weight: 700;
-  line-height: var(--lh-heading-04);
+  line-height: var(--lh-tight);
   color: var(--color-text-primary);
 }
 
@@ -23,9 +23,6 @@
   gap: var(--space-4);
 }
 
-// Figma's mobile heading rows show only "View All" — swipe already scrolls
-// the row, so the chevrons are a desktop/mouse-only convenience and only
-// appear from tablet up.
 .section-header__chevron {
   display: none;
   align-items: center;

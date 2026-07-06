@@ -46,7 +46,6 @@
   display: block;
   font-size: var(--text-md);
   font-weight: 500;
-  line-height: var(--lh-md);
   color: var(--color-text-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -56,7 +55,7 @@
 .featured__release-artist {
   display: block;
   font-size: var(--text-sm);
-  line-height: var(--lh-sm);
+  line-height: var(--lh-tight);
   color: var(--color-text-muted);
   white-space: nowrap;
   overflow: hidden;
@@ -122,6 +121,6 @@
 
 .featured__playlist-subtitle {
   font-size: var(--text-sm);
-  line-height: var(--lh-sm);
+  line-height: var(--lh-tight);
   color: var(--color-text-muted);
 }

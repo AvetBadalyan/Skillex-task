@@ -76,7 +76,7 @@
   gap: var(--space-4);
   min-width: 0;
   font-size: var(--text-sm);
-  line-height: var(--lh-sm);
+  line-height: var(--lh-tight);
   color: var(--color-text-muted);
 }
 
@@ -97,7 +97,7 @@
   display: block;
   width: 100%;
   font-size: var(--text-sm);
-  line-height: var(--lh-sm);
+  line-height: var(--lh-tight);
   color: var(--color-text-muted);
   white-space: nowrap;
   overflow: hidden;
