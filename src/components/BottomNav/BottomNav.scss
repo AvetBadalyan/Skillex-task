@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 90;
+  z-index: var(--z-bottom-nav);
   display: flex;
   align-items: center;
   gap: var(--space-16);

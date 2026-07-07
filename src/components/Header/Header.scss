@@ -46,7 +46,7 @@
 .header__left {
   display: flex;
   align-items: center;
-  gap: var(--space-12);
+  gap: var(--space-8);
   flex: 1;
   min-width: 0;
 }
@@ -73,10 +73,11 @@
   padding: var(--space-10) var(--space-8);
   border-radius: var(--radius-md);
   background-color: var(--color-bg-promo);
-  color: var(--color-text-primary);
+  color: var(--color-footer-heading);
   font-family: var(--font-family);
   font-size: var(--text-md);
   font-weight: 500;
+  line-height: var(--lh-snug);
   transition: filter var(--transition-base);
 
   &:hover {
@@ -102,7 +103,7 @@
 .header__right {
   display: flex;
   align-items: center;
-  gap: var(--space-12);
+  gap: var(--space-8);
   margin-left: auto;
   flex-shrink: 0;
 }
@@ -113,6 +114,10 @@
   align-items: center;
   gap: var(--space-8);
   height: 4rem;
+  padding: 0 var(--space-8);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-faint);
 
   @include screen-from($screen-desktop) {
     display: flex;
@@ -121,8 +126,8 @@
 
 .header__utility-divider {
   width: 1px;
-  height: 1.6rem;
-  background-color: var(--color-border-subtle);
+  height: 2.8rem;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .header__utility-btn {
@@ -150,7 +155,11 @@
 }
 
 .header__btn {
-  padding: var(--space-8) var(--space-16);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.6rem;
+  padding: 0 var(--space-8);
   border-radius: var(--radius-md);
   border: 1px solid transparent;
   font-family: var(--font-family);
@@ -161,6 +170,12 @@
     background-color var(--transition-base),
     border-color var(--transition-base),
     filter var(--transition-base);
+
+  @include screen-from($screen-tablet) {
+    height: 4rem;
+    padding: 0 var(--space-12);
+    font-size: var(--text-base);
+  }
 
   &--primary {
     background-color: var(--color-accent);
