@@ -1,5 +1,4 @@
 :root {
-  /* Colors */
   --color-bg-primary: #0d0c0c;
   --color-bg-sidebar: #1d1c1c;
   --color-bg-header: #1d1c1c;
@@ -8,8 +7,8 @@
   --color-bg-control: #393737;
 
   --color-accent: #ff9b04;
-  --color-accent-rgb:
-    255, 155, 4; /* same value as --color-accent, as R, G, B channels for rgba() tints */
+  /* R, G, B channels of --color-accent, for rgba() tints — keep in sync */
+  --color-accent-rgb: 255, 155, 4;
   --color-bg-promo: #5738ad;
 
   /* Figma's "warning" family — a separate token group from --color-accent,
@@ -22,7 +21,6 @@
   --color-text-nav-label: #aaa6a6; /* sidebar/item/text/default — sidebar menu link labels only */
   --color-footer-heading: #dcdada; /* footer/txt/02 — footer section/social headings only, slightly dimmer than --color-text-primary */
 
-  /* Borders */
   --color-border: #393737;
   --color-border-subtle: rgba(255, 255, 255, 0.15);
   --color-border-input: rgba(255, 255, 255, 0.25);
@@ -33,17 +31,17 @@
      correct if --color-bg-sidebar ever changes. */
   --color-bg-nav-container: rgba(255, 255, 255, 0.07);
 
-  /* Shadow */
   --shadow-default: 0 2px 16px rgba(8, 8, 7, 0.1);
   --shadow-header: 0 0 16px rgba(8, 8, 7, 0.1);
   --shadow-sidebar: 2px 0 16px rgba(8, 8, 7, 0.1);
 
-  /* Layout */
   --sidebar-width: 24rem;
   --sidebar-width-collapsed: 7.2rem;
   --header-height: 6.4rem;
+  /* Caps content area to the Figma canvas width (1440px) so pages don't
+     stretch edge-to-edge on ultra-wide viewports. */
+  --content-max-width: 144rem;
 
-  /* Spacing (numeric scale — matches Figma spacing tokens) */
   --space-4: 0.4rem;
   --space-6: 0.6rem;
   --space-8: 0.8rem;
@@ -58,30 +56,26 @@
   --space-48: 4.8rem;
   --space-64: 6.4rem;
 
-  /* Border radius */
   --radius-sm: 0.4rem;
   --radius-md: 0.8rem;
   --radius-lg: 1.2rem;
 
-  /* Typography — font sizes (1rem = 10px) */
+  /* 1rem = 10px throughout this file */
   --font-family: 'Inter', system-ui, sans-serif;
 
-  --text-sm: 1.2rem; /* 12px — small text, captions */
-  --text-md: 1.4rem; /* 14px — body text, labels */
-  --text-base: 1.6rem; /* 16px — normal body text */
-  --text-lg: 1.8rem; /* 18px — card titles, emphasis */
-  --heading-04: 2.4rem; /* 24px — section headings */
-  --heading-05: 2rem; /* 20px — minor headings (e.g. footer social title) */
+  --text-sm: 1.2rem;
+  --text-md: 1.4rem;
+  --text-base: 1.6rem;
+  --text-lg: 1.8rem;
+  --heading-04: 2.4rem;
+  --heading-05: 2rem;
 
-  /* Line height */
   --lh-tight: 1.25;
   --lh-snug: 1.4;
 
-  /* Transitions */
   --transition-base: 200ms ease;
   --transition-sidebar: 250ms ease;
 
-  /* Z-index */
   --z-sidebar: 100;
   --z-header: 200;
   --z-overlay: 50;

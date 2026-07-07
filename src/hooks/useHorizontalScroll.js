@@ -1,8 +1,7 @@
 import { useRef } from 'react';
 
-// Shared by every horizontally-scrolling row (New Releases, Music Labels,
-// Recommended For You, ...) so the scroll-by-one-viewport behavior behind
-// each SectionHeader's chevrons is written once.
+// Scrolls a track by one viewport width — the behavior behind each
+// SectionHeader's chevrons.
 export function useHorizontalScroll() {
   const trackRef = useRef(null);
 

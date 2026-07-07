@@ -1,6 +1,5 @@
 // Hides the native scrollbar on a horizontally-scrolling row while keeping
-// it scrollable by touch/trackpad/wheel — used by every swipeable carousel
-// (Top Charts, New Releases, Music Labels, Trending Artists, Filter tabs).
+// it scrollable by touch/trackpad/wheel.
 @mixin hide-scrollbar {
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;

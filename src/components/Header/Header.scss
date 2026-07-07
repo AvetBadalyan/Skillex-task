@@ -1,12 +1,7 @@
 @use '../../styles/breakpoints' as *;
 
 .header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-16);
   flex-shrink: 0;
-  height: var(--header-height);
-  padding: var(--space-12) var(--space-20);
   background-color: var(--color-bg-header);
   border-bottom: 1px solid var(--color-border-header);
   box-shadow: var(--shadow-header);
@@ -17,6 +12,16 @@
   @include screen-from($screen-desktop) {
     position: static;
   }
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  height: var(--header-height);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-20);
 }
 
 // The sidebar drawer (with its own logo) is off-canvas on mobile/tablet, so

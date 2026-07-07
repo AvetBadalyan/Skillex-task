@@ -1,10 +1,6 @@
 @use '../../styles/breakpoints' as *;
 @use '../../styles/mixins' as *;
 
-// Narrow (phone/tablet): everything stacks in a column — search, then the
-// "Items" dropdown, then the scrollable tabs. From the tablet breakpoint up:
-// the dropdown (fixed 278x44) and search (fills the rest) share a row on
-// top, with the tabs in their own full-width row below.
 .filter-bar {
   display: flex;
   flex-direction: column;
@@ -122,8 +118,6 @@
   pointer-events: none;
 }
 
-// Fills whatever room is left beside the fixed-width dropdown once they
-// share a row from the tablet breakpoint up.
 .filter-bar__search {
   display: flex;
   align-items: center;
