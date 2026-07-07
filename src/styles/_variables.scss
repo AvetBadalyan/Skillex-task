@@ -19,6 +19,7 @@
 
   --color-text-primary: #fafafa;
   --color-text-muted: #c4c0c0;
+  --color-text-nav-label: #aaa6a6; /* sidebar/item/text/default — sidebar menu link labels only */
   --color-footer-heading: #dcdada; /* footer/txt/02 — footer section/social headings only, slightly dimmer than --color-text-primary */
 
   /* Borders */
@@ -26,6 +27,11 @@
   --color-border-subtle: rgba(255, 255, 255, 0.15);
   --color-border-input: rgba(255, 255, 255, 0.25);
   --color-border-header: rgba(255, 255, 255, 0.03);
+
+  /* Sidebar nav "card" background — Figma token transparent/02, a 7% white
+     tint over the sidebar background rather than a flat color, so it stays
+     correct if --color-bg-sidebar ever changes. */
+  --color-bg-nav-container: rgba(255, 255, 255, 0.07);
 
   /* Shadow */
   --shadow-default: 0 2px 16px rgba(8, 8, 7, 0.1);

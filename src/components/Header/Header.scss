@@ -19,6 +19,25 @@
   }
 }
 
+// The sidebar drawer (with its own logo) is off-canvas on mobile/tablet, so
+// the header carries a logo of its own there; redundant once the sidebar
+// becomes a persistent rail on desktop.
+.header__logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  @include screen-from($screen-desktop) {
+    display: none;
+  }
+}
+
+.header__logo {
+  display: block;
+  width: 9.6rem;
+  height: auto;
+}
+
 .header__left {
   display: flex;
   align-items: center;
@@ -27,71 +46,18 @@
   min-width: 0;
 }
 
-// Icon-only square by default; expands in place to a full text input on
-// focus so the collapsed state matches Figma while staying usable.
-.header__search {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  width: 4rem;
-  height: 4rem;
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg-control);
-  border: 1px solid var(--color-border-subtle);
-  overflow: hidden;
-  transition: width var(--transition-base);
+// The sidebar drawer owns the search box on mobile/tablet (next to its own
+// toggle); it only lives in the header once the sidebar becomes a rail.
+// Compounded with .search-box so it reliably wins over that class's own
+// `display: flex`, regardless of which stylesheet loads second.
+.header__search.search-box {
+  display: none;
 
-  &--expanded {
-    flex-shrink: 1;
-    width: 32rem;
+  @include screen-from($screen-desktop) {
+    display: flex;
   }
 }
 
-.header__search-icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 4rem;
-  height: 4rem;
-}
-
-.header__search-icon {
-  display: block;
-  width: 1.6rem;
-  height: 1.6rem;
-  flex-shrink: 0;
-  color: var(--color-text-muted);
-}
-
-.header__search-input {
-  flex: 1;
-  min-width: 0;
-  height: 100%;
-  padding-right: var(--space-16);
-  border: none;
-  background: transparent;
-  color: var(--color-text-primary);
-  font-family: var(--font-family);
-  font-size: var(--text-md);
-  opacity: 0;
-  transition: opacity var(--transition-base);
-
-  &::placeholder {
-    color: var(--color-text-muted);
-  }
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.header__search--expanded .header__search-input {
-  opacity: 1;
-}
-
-// Rewards hides below tablet width so the search + auth + language cluster
-// never overflows a small phone screen.
 .header__icon-btn {
   display: none;
   align-items: center;
@@ -136,13 +102,16 @@
   flex-shrink: 0;
 }
 
-// Language + settings live together in one 40px-tall row with a divider,
-// each control sized to the 24x24 spec instead of the larger square buttons.
+// The sidebar drawer carries language/settings on mobile/tablet instead.
 .header__utility {
-  display: flex;
+  display: none;
   align-items: center;
   gap: var(--space-8);
   height: 4rem;
+
+  @include screen-from($screen-desktop) {
+    display: flex;
+  }
 }
 
 .header__utility-divider {

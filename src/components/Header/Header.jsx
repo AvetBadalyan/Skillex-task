@@ -1,36 +1,20 @@
-import { useRef, useState } from 'react';
 import './Header.scss';
-import { IconSearch, IconPresent, IconSettings } from '../icons';
+import { IconPresent, IconSettings, IconLogo } from '../icons';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
+import SearchBox from '../SearchBox/SearchBox';
 
 function Header() {
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-  const searchInputRef = useRef(null);
-
   return (
     <header className="header">
+      <a href="#" className="header__logo-link" aria-label="Skillex home">
+        <IconLogo className="header__logo" />
+      </a>
+
       <div className="header__left">
-        <div
-          className={`header__search${isSearchExpanded ? ' header__search--expanded' : ''}`}
-        >
-          <button
-            type="button"
-            className="header__search-icon-btn"
-            onClick={() => searchInputRef.current?.focus()}
-            aria-label="Search"
-            tabIndex={isSearchExpanded ? -1 : 0}
-          >
-            <IconSearch className="header__search-icon" />
-          </button>
-          <input
-            ref={searchInputRef}
-            type="text"
-            className="header__search-input"
-            placeholder="Search songs, artists, playlists..."
-            onFocus={() => setIsSearchExpanded(true)}
-            onBlur={() => setIsSearchExpanded(false)}
-          />
-        </div>
+        <SearchBox
+          className="header__search"
+          placeholder="Search songs, artists, playlists..."
+        />
 
         <button type="button" className="header__icon-btn">
           <IconPresent className="header__icon-btn-icon" />

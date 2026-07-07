@@ -9,7 +9,10 @@ import {
   IconLogo,
   IconSun,
   IconMoon,
+  IconSettings,
 } from '../icons';
+import LanguageSelector from '../LanguageSelector/LanguageSelector';
+import SearchBox from '../SearchBox/SearchBox';
 
 const MENU_ITEMS = [
   { id: 'home', label: 'Home', icon: IconHome },
@@ -34,7 +37,7 @@ function Sidebar({ isOpen, onToggle }) {
 
   return (
     <aside
-      className={`sidebar${isOpen ? ' sidebar--open' : ''}`}
+      className={`sidebar ${isOpen ? 'sidebar--open' : 'sidebar--collapsed'}`}
       aria-label="Sidebar navigation"
     >
       <div className="sidebar__header">
@@ -47,8 +50,21 @@ function Sidebar({ isOpen, onToggle }) {
           <IconMenu className="sidebar__toggle-icon" />
         </button>
 
+        <SearchBox className="sidebar__search" placeholder="Search..." />
+
         <IconLogo className="sidebar__logo" />
         <IconLogo mark className="sidebar__logo-mark" />
+
+        <div className="sidebar__header-actions">
+          <LanguageSelector compact />
+          <button
+            type="button"
+            className="sidebar__header-action"
+            aria-label="Settings"
+          >
+            <IconSettings className="sidebar__header-action-icon" />
+          </button>
+        </div>
       </div>
 
       <div className="sidebar__tabs">
@@ -65,6 +81,12 @@ function Sidebar({ isOpen, onToggle }) {
           </button>
         ))}
       </div>
+
+      <div
+        className="sidebar__divider"
+        role="separator"
+        aria-orientation="horizontal"
+      />
 
       <nav className="sidebar__nav">
         <ul className="sidebar__menu">

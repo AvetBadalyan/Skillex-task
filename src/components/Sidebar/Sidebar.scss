@@ -1,5 +1,14 @@
 @use '../../styles/breakpoints' as *;
 
+// Scopes a rule to the desktop rail's collapsed (icon-only) state.
+@mixin collapsed {
+  @include screen-from($screen-desktop) {
+    .sidebar--collapsed & {
+      @content;
+    }
+  }
+}
+
 .sidebar {
   position: fixed;
   bottom: 0;
@@ -10,6 +19,7 @@
   flex-direction: column;
   width: 100%;
   max-height: 90dvh;
+  padding: var(--space-12) var(--space-16);
   background-color: var(--color-bg-sidebar);
   border-top: 1px solid var(--color-border);
   transform: translateY(100%);
@@ -27,375 +37,386 @@
     width: var(--sidebar-width);
     height: 100dvh;
     border-top: none;
-    border-right: 1px solid var(--color-border);
-    box-shadow: var(--shadow-sidebar);
+    // box-shadow, not border-right, so this line doesn't eat into the
+    // border-box width the collapsed rail's fixed-width icons rely on.
+    box-shadow:
+      inset -1px 0 0 var(--color-border),
+      var(--shadow-sidebar);
     transform: none;
     flex-shrink: 0;
-    transition: width var(--transition-sidebar);
+    transition:
+      width var(--transition-sidebar),
+      padding var(--transition-sidebar);
 
-    &.sidebar--open {
+    &.sidebar--collapsed {
       width: var(--sidebar-width-collapsed);
+      padding: var(--space-12);
     }
   }
-}
 
-.sidebar__header {
-  flex-shrink: 0;
-  padding: var(--space-12) var(--space-16);
-  border-bottom: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--space-12);
+  &__header {
+    flex-shrink: 0;
+    margin-bottom: var(--space-20);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-20);
 
-  @include screen-from($screen-desktop) {
-    border-bottom: none;
+    @include collapsed {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      margin-left: auto;
+
+      @include screen-from($screen-desktop) {
+        display: none;
+      }
+    }
+
+    &-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: var(--space-24);
+      height: var(--space-24);
+      border-radius: 50%;
+      background-color: var(--color-accent);
+      color: var(--color-bg-primary);
+      transition: filter var(--transition-base);
+
+      &:hover {
+        filter: brightness(1.15);
+      }
+
+      &-icon {
+        display: block;
+        width: 1.4rem;
+        height: 1.4rem;
+        flex-shrink: 0;
+      }
+    }
   }
-}
 
-.sidebar__logo {
-  display: block;
-  width: 12.9rem;
-  height: auto;
-  max-width: 100%;
-}
-
-.sidebar__logo-mark {
-  display: none;
-  width: 2rem;
-  height: auto;
-}
-
-// The "--open" modifier is applied by the same toggle button at every screen
-// size, but each breakpoint has a different default to toggle away from: on
-// mobile the sidebar is an off-canvas drawer that starts hidden (open = shown),
-// while on desktop it's a persistent rail that starts full-width (open =
-// collapsed to icons only). One button, two meanings by design.
-//
-// Collapsed rail is 7.2rem (72px) wide; 1.2rem (12px) padding on every side
-// leaves exactly 4.8rem (48px) of content — which is exactly the size of
-// each icon square below, so it sits flush with no leftover asymmetric gap.
-@include screen-from($screen-desktop) {
-  .sidebar--open .sidebar__header {
-    flex-direction: column;
-    justify-content: center;
-    padding: var(--space-12);
+  // The header carries search once the sidebar becomes a desktop rail —
+  // this copy is only for the mobile/tablet off-canvas drawer. Compounded
+  // with .search-box (not a plain single class) so it reliably wins over
+  // that class's own `display: flex`, regardless of which of the two
+  // stylesheets happens to load second.
+  &__search.search-box {
+    @include screen-from($screen-desktop) {
+      display: none;
+    }
   }
 
-  // The full wordmark can't shrink to 48px and stay legible, so it swaps for
-  // the "L" mark (one of the logo's own letterform paths, cropped) instead.
-  .sidebar--open .sidebar__logo {
+  &__logo {
     display: none;
+    width: 12.9rem;
+    height: auto;
+    max-width: 100%;
+
+    @include screen-from($screen-desktop) {
+      display: block;
+    }
+
+    @include collapsed {
+      display: none;
+    }
+
+    &-mark {
+      display: none;
+      width: 2rem;
+      height: auto;
+
+      @include collapsed {
+        display: block;
+      }
+    }
   }
 
-  .sidebar--open .sidebar__logo-mark {
-    display: block;
-  }
-
-  .sidebar--open .sidebar__toggle {
-    width: 4.8rem;
-    height: 4.8rem;
-  }
-}
-
-.sidebar__toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 4rem;
-  height: 4rem;
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg-control);
-  box-shadow: var(--shadow-default);
-  color: var(--color-text-primary);
-  transition:
-    background-color var(--transition-base),
-    border-color var(--transition-base);
-
-  &:hover {
-    border-color: var(--color-border);
-    filter: brightness(1.15);
-  }
-}
-
-.sidebar__toggle-icon {
-  display: block;
-  width: 2rem;
-  height: 2rem;
-}
-
-// Quick-switch tabs above the main nav. Same collapse technique as the nav
-// labels below: max-width (not visibility) collapses the label's box so the
-// icon can center in the rail with no leftover label-shaped gap.
-.sidebar__tabs {
-  display: flex;
-  flex-shrink: 0;
-  gap: var(--space-8);
-  padding: var(--space-12) var(--space-16);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.sidebar__tab {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-8);
-  flex: 1;
-  height: 4rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border-subtle);
-  // Figma's gray/02 -> gray/04, a one-off pairing not used anywhere else,
-  // so left inline rather than adding two more single-use variables.
-  background: radial-gradient(120% 120% at 0% 0%, #2a2828 0%, #4e4b4b 100%);
-  color: var(--color-text-primary);
-  transition:
-    opacity var(--transition-base),
-    gap var(--transition-sidebar);
-
-  &--active {
-    background: radial-gradient(
-      120% 120% at 0% 0%,
-      var(--color-warning-start) 0%,
-      var(--color-warning-end) 100%
-    );
-    opacity: 0.9;
-  }
-}
-
-.sidebar__tab-icon {
-  display: block;
-  width: 1.6rem;
-  height: 1.6rem;
-  flex-shrink: 0;
-}
-
-.sidebar__tab-label {
-  font-size: var(--text-md);
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 1;
-  max-width: 10rem;
-  transition:
-    opacity var(--transition-sidebar),
-    max-width var(--transition-sidebar);
-}
-
-@include screen-from($screen-desktop) {
-  .sidebar--open .sidebar__tabs {
-    flex-direction: column;
+  &__toggle {
+    display: inline-flex;
     align-items: center;
-    gap: var(--space-12);
-    padding: var(--space-12);
-  }
-
-  .sidebar--open .sidebar__tab {
-    flex: none;
-    width: 4.8rem;
-    height: 4.8rem;
-    // A zero-width label is still a flex item, and "gap" inserts space
-    // between every item regardless of size — without zeroing it too, the
-    // icon sits off-center by half the gap even though the label is invisible.
-    gap: 0;
-  }
-
-  .sidebar--open .sidebar__tab-label {
-    opacity: 0;
-    max-width: 0;
-  }
-}
-
-.sidebar__nav {
-  flex: 1;
-  overflow-y: auto;
-  padding: var(--space-12) var(--space-16);
-}
-
-.sidebar__menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-}
-
-.sidebar__menu-item {
-  display: flex;
-}
-
-.sidebar__menu-link {
-  display: flex;
-  align-items: center;
-  gap: var(--space-16);
-  flex: 1;
-  padding: var(--space-6) var(--space-16);
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-nav-item);
-  transition:
-    background-color var(--transition-base),
-    gap var(--transition-sidebar);
-
-  &:hover {
-    background-color: rgba(var(--color-accent-rgb), 0.1);
-  }
-
-  &:active {
-    background-color: var(--color-accent);
-    color: var(--color-bg-primary);
-  }
-}
-
-.sidebar__menu-icon {
-  display: block;
-  width: 2rem;
-  height: 2rem;
-  flex-shrink: 0;
-}
-
-.sidebar__menu-label {
-  font-size: var(--text-md);
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 1;
-  max-width: 16rem;
-  transition:
-    opacity var(--transition-sidebar),
-    max-width var(--transition-sidebar);
-}
-
-@include screen-from($screen-desktop) {
-  .sidebar--open .sidebar__nav {
-    padding: var(--space-12);
-  }
-
-  // A collapsed nav item becomes a centered 48x48 square: the item itself
-  // still spans the full rail width (stretched by the column-flex parent),
-  // so both the item and the link need justify-content:center, and the link
-  // needs an explicit fixed size instead of flex:1 (which would otherwise
-  // stretch it back out to the rail's full width).
-  .sidebar--open .sidebar__menu-item {
     justify-content: center;
-  }
-
-  .sidebar--open .sidebar__menu-link {
-    flex: none;
-    width: 4.8rem;
-    height: 4.8rem;
-    justify-content: center;
-    // A zero-width label is still a flex item, and "gap" inserts space
-    // between every item regardless of size — without zeroing it too, the
-    // icon sits off-center by half the gap even though the label is invisible.
-    gap: 0;
-    // --color-bg-nav-item is only ~3 shades off the sidebar's own background,
-    // so at icon-only size (no label to give the row visual weight) it read
-    // as "no button at all". Swap to the same visible chip color used by the
-    // toggle and theme buttons so every collapsed icon looks consistent.
+    flex-shrink: 0;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
     background-color: var(--color-bg-control);
+    box-shadow: var(--shadow-default);
+    color: var(--color-text-primary);
+    transition:
+      background-color var(--transition-base),
+      border-color var(--transition-base);
+
+    &:hover {
+      border-color: var(--color-border);
+      filter: brightness(1.15);
+    }
+
+    @include collapsed {
+      width: var(--space-48);
+      height: var(--space-48);
+    }
+
+    &-icon {
+      display: block;
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
-  .sidebar--open .sidebar__menu-label {
-    opacity: 0;
-    max-width: 0;
-  }
-}
+  &__tabs {
+    display: flex;
+    flex-shrink: 0;
+    gap: var(--space-20) var(--space-8);
 
-.sidebar__footer {
-  flex-shrink: 0;
-  padding: var(--space-12) var(--space-16);
-  border-top: 1px solid var(--color-border);
-}
-
-.sidebar__theme {
-  display: flex;
-  gap: var(--space-8);
-  padding: var(--space-8);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border-subtle);
-  background-color: var(--color-bg-primary);
-}
-
-.sidebar__theme-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-8);
-  flex: 1;
-  height: 3.6rem;
-  border-radius: var(--radius-sm);
-  color: var(--color-text-primary);
-  transition:
-    background-color var(--transition-base),
-    gap var(--transition-sidebar);
-
-  // The active state reuses the same neutral control color as other
-  // pressed/selected chrome in the app (not the orange accent, which is
-  // reserved for primary calls to action).
-  &--active {
-    background-color: var(--color-bg-control);
-  }
-}
-
-.sidebar__theme-icon {
-  display: block;
-  width: 1.6rem;
-  height: 1.6rem;
-  flex-shrink: 0;
-}
-
-.sidebar__theme-label {
-  font-size: var(--text-md);
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  opacity: 1;
-  max-width: 8rem;
-  transition:
-    opacity var(--transition-sidebar),
-    max-width var(--transition-sidebar);
-}
-
-@include screen-from($screen-desktop) {
-  .sidebar--open .sidebar__footer {
-    padding: var(--space-12);
+    @include collapsed {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
-  // The wrapper's own padding/border only make sense when it's framing two
-  // side-by-side buttons that share the rail's full width. Collapsed, each
-  // button already IS a 48px chip on its own — keeping the wrapper's padding
-  // would leave no room for a 48px button inside 48px of available space, so
-  // the wrapper goes chromeless and just stacks the two chips directly.
-  .sidebar--open .sidebar__theme {
-    flex-direction: column;
+  &__tab {
+    display: flex;
     align-items: center;
-    gap: var(--space-12);
+    justify-content: center;
+    gap: var(--space-10);
+    flex: 0 0 10rem;
+    padding: var(--space-8) var(--space-6);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 0 0 1px var(--color-border-subtle);
+    // Figma's gray/02 -> gray/04, a one-off gradient pairing not used
+    // anywhere else, so left inline rather than adding two single-use vars.
+    background: radial-gradient(120% 120% at 0% 0%, #2a2828 0%, #4e4b4b 100%);
+    color: var(--color-text-primary);
+    transition:
+      opacity var(--transition-base),
+      gap var(--transition-sidebar);
+
+    &--active {
+      background: radial-gradient(
+        120% 120% at 0% 0%,
+        var(--color-warning-start) 0%,
+        var(--color-warning-end) 100%
+      );
+      opacity: 0.9;
+    }
+
+    @include collapsed {
+      flex: none;
+      width: var(--space-48);
+      height: var(--space-48);
+      gap: 0;
+    }
+
+    &-icon {
+      display: block;
+      width: 2.4rem;
+      height: 2.4rem;
+      flex-shrink: 0;
+    }
+
+    &-label {
+      font-size: var(--text-md);
+      font-weight: 500;
+      line-height: var(--lh-tight);
+      letter-spacing: -0.02em;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 1;
+      max-width: 10rem;
+      transition:
+        opacity var(--transition-sidebar),
+        max-width var(--transition-sidebar);
+
+      @include collapsed {
+        opacity: 0;
+        max-width: 0;
+      }
+    }
+  }
+
+  &__divider {
+    flex-shrink: 0;
+    height: 1px;
+    margin-block: var(--space-20);
+    background-color: var(--color-border);
+  }
+
+  &__nav {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: var(--space-20);
+    padding: var(--space-8);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-nav-container);
+
+    @include collapsed {
+      padding: 0;
+      background-color: transparent;
+    }
+  }
+
+  &__menu {
+    list-style: none;
     padding: 0;
-    border: none;
-    background-color: transparent;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+
+    &-item {
+      display: flex;
+
+      @include collapsed {
+        justify-content: center;
+      }
+    }
+
+    &-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      flex: 1;
+      padding: var(--space-6);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--color-text-nav-label);
+      background-color: var(--color-bg-nav-item);
+      transition:
+        background-color var(--transition-base),
+        gap var(--transition-sidebar);
+
+      &:hover {
+        background-color: rgba(var(--color-accent-rgb), 0.1);
+      }
+
+      &:active {
+        background-color: var(--color-accent);
+        color: var(--color-bg-primary);
+
+        .sidebar__menu-icon {
+          color: var(--color-bg-primary);
+        }
+      }
+
+      @include collapsed {
+        flex: none;
+        width: var(--space-48);
+        height: var(--space-48);
+        justify-content: center;
+        gap: 0;
+        background-color: var(--color-bg-control);
+      }
+    }
+
+    &-icon {
+      display: block;
+      width: 2.4rem;
+      height: 2.4rem;
+      flex-shrink: 0;
+      color: var(--color-text-muted);
+    }
+
+    &-label {
+      font-size: var(--text-base);
+      line-height: 1;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 1;
+      max-width: 16rem;
+      transition:
+        opacity var(--transition-sidebar),
+        max-width var(--transition-sidebar);
+
+      @include collapsed {
+        opacity: 0;
+        max-width: 0;
+      }
+    }
   }
 
-  // Unselected collapses to the same neutral chip as every other collapsed
-  // icon; the base `.sidebar__theme-btn--active` rule already applies its
-  // (also neutral) background on top, matching the Figma spec's
-  // sidebar/switcher/bg-active token — this is not the orange accent, which
-  // this component reserves for primary calls to action only.
-  .sidebar--open .sidebar__theme-btn {
-    flex: none;
-    width: 4.8rem;
-    height: 4.8rem;
-    gap: 0;
-    background-color: var(--color-bg-control);
+  &__footer {
+    flex-shrink: 0;
   }
 
-  .sidebar--open .sidebar__theme-label {
-    opacity: 0;
-    max-width: 0;
+  &__theme {
+    display: flex;
+    gap: var(--space-16) var(--space-8);
+    padding: var(--space-6);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background-color: var(--color-bg-primary);
+
+    @include collapsed {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-8);
+      flex: 1;
+      min-width: 0;
+      height: 3.6rem;
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      transition:
+        background-color var(--transition-base),
+        gap var(--transition-sidebar);
+
+      &--active {
+        background-color: var(--color-bg-control);
+      }
+
+      // Per Figma: the collapsed rail's other icons (toggle/tab/menu-link)
+      // sit in a 48px chip, but the theme switcher's own chip is 34px —
+      // a deliberately smaller, distinct spec value, not a mistake.
+      @include collapsed {
+        flex: none;
+        width: 3.4rem;
+        height: 3.4rem;
+        gap: 0;
+      }
+    }
+
+    &-icon {
+      display: block;
+      width: 2.2rem;
+      height: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    &-label {
+      font-size: var(--text-base);
+      line-height: 1.5;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 1;
+      max-width: 8rem;
+      transition:
+        opacity var(--transition-sidebar),
+        max-width var(--transition-sidebar);
+
+      @include collapsed {
+        opacity: 0;
+        max-width: 0;
+      }
+    }
   }
 }
