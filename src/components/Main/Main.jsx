@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './Main.scss';
 import Slideshow from '../Slideshow/Slideshow';
 import TopCharts from '../TopCharts/TopCharts';
-import FilterBar from '../FilterBar/FilterBar';
 import FeaturedSection from '../FeaturedSection/FeaturedSection';
 import LabelsSection from '../LabelsSection/LabelsSection';
 import ArtistsSection from '../ArtistsSection/ArtistsSection';
@@ -25,11 +24,6 @@ function Main() {
     <main className="main">
       <Slideshow />
       <TopCharts
-        activeFormat={activeFormat}
-        activeCategory={activeCategory}
-        searchQuery={searchQuery}
-      />
-      <FilterBar
         activeFormat={activeFormat}
         onFormatChange={handleFormatChange}
         activeCategory={activeCategory}

@@ -1,8 +1,16 @@
 import './TopCharts.scss';
 import { IconPrize, IconCrown } from '../icons';
 import { CATALOG_ITEMS, ALL_ID } from '../../constants/catalog';
+import FilterBar from '../FilterBar/FilterBar';
 
-function TopCharts({ activeFormat, activeCategory, searchQuery }) {
+function TopCharts({
+  activeFormat,
+  onFormatChange,
+  activeCategory,
+  onCategoryChange,
+  searchQuery,
+  onSearchChange,
+}) {
   const query = searchQuery.trim().toLowerCase();
   const items = CATALOG_ITEMS.filter((item) => {
     const matchesFormat = item.format === activeFormat;
@@ -42,6 +50,14 @@ function TopCharts({ activeFormat, activeCategory, searchQuery }) {
           <p className="top-charts__empty">No results match your filters.</p>
         )}
       </div>
+      <FilterBar
+        activeFormat={activeFormat}
+        onFormatChange={onFormatChange}
+        activeCategory={activeCategory}
+        onCategoryChange={onCategoryChange}
+        searchQuery={searchQuery}
+        onSearchChange={onSearchChange}
+      />
     </section>
   );
 }
