@@ -34,9 +34,9 @@ export const FOOTER_SECTIONS = [
 ];
 
 export const SOCIAL_LINKS = [
+  { icon: IconTelegram, href: '#', label: 'Telegram' },
   { icon: IconLinkedin, href: '#', label: 'LinkedIn' },
   { icon: IconTwitter, href: '#', label: 'Twitter' },
-  { icon: IconTelegram, href: '#', label: 'Telegram' },
   { icon: IconViber, href: '#', label: 'Viber' },
 ];
 

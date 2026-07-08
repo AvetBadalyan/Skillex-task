@@ -225,8 +225,10 @@
   &__disclaimer {
     margin: 0;
     max-width: 80.5rem;
-    font-size: var(--text-lg);
-    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-text-primary);
   }
 
   &__legal-actions {
@@ -259,6 +261,7 @@
 
   &__scroll-top {
     @include icon-chip(4rem);
+    border: 1px solid var(--color-border-subtle);
 
     @include screen-from($screen-tablet) {
       display: none;

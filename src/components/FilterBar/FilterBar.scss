@@ -4,7 +4,7 @@
 .filter-bar {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-10);
   margin-top: var(--space-24);
 
   @include screen-from($screen-tablet) {
@@ -16,7 +16,7 @@
   &__tabs {
     @include horizontal-scroll-row;
     align-items: center;
-    gap: var(--space-6);
+    gap: var(--space-8);
     order: 3;
 
     @include screen-from($screen-tablet) {
@@ -75,11 +75,12 @@
     position: relative;
     display: flex;
     order: 2;
-    height: 4.4rem;
+    height: 4rem;
 
     @include screen-from($screen-tablet) {
       order: 1;
       flex: 0 0 27.8rem;
+      height: 4.4rem;
     }
   }
 
@@ -118,7 +119,7 @@
     align-items: center;
     gap: var(--space-8);
     order: 1;
-    height: 4.4rem;
+    height: 4rem;
     padding: var(--space-10) var(--space-16);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-md);
@@ -127,6 +128,7 @@
     @include screen-from($screen-tablet) {
       flex: 1 1 auto;
       min-width: 0;
+      height: 4.4rem;
     }
   }
 

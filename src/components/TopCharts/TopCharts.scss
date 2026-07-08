@@ -5,23 +5,29 @@
   &__title {
     display: flex;
     align-items: center;
-    gap: var(--space-12);
+    gap: var(--space-8);
     margin: 0 0 var(--space-16);
-    font-size: var(--heading-04);
+    font-size: var(--heading-05);
     font-weight: 700;
     line-height: var(--lh-4-3);
     color: var(--color-text-primary);
 
     @include screen-from($screen-tablet) {
       margin-bottom: var(--space-20);
+      font-size: var(--heading-04);
     }
   }
 
   &__title-icon {
     display: block;
-    width: 3.2rem;
-    height: 3.2rem;
+    width: 2.4rem;
+    height: 2.4rem;
     flex-shrink: 0;
+
+    @include screen-from($screen-tablet) {
+      width: 3.2rem;
+      height: 3.2rem;
+    }
   }
 
   &__list {
