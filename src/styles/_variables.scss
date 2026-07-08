@@ -7,7 +7,6 @@
   --color-bg-control: #393737;
 
   --color-accent: #ff9b04;
-  /* R, G, B channels of --color-accent, for rgba() tints — keep in sync */
   --color-accent-rgb: 255, 155, 4;
   --color-bg-promo: #5738ad;
 
@@ -26,7 +25,6 @@
   --color-border-header: rgba(255, 255, 255, 0.03);
   --color-border-strong: rgba(255, 255, 255, 0.2);
 
-  /* R, G, B channels of --color-bg-primary, for rgba() tints — keep in sync */
   --color-bg-primary-rgb: 13, 12, 12;
 
   --color-scrim: rgba(0, 0, 0, 0.5);
@@ -78,8 +76,7 @@
   --transition-base: 200ms ease;
   --transition-sidebar: 0.3s ease-in-out;
 
-  // Sidebar drawer + backdrop must stay above the header, so ascending
-  // order here matters: bottom nav < header < sidebar.
+  // bottom nav < header < sidebar.
   --z-bottom-nav: 90;
   --z-header: 100;
   --z-sidebar: 200;

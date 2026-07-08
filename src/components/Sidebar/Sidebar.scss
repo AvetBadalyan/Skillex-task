@@ -36,10 +36,6 @@
   transform: translateY(100%);
   transition: transform var(--transition-sidebar);
 
-  // Nested here (not as a standalone rule after the desktop query below) so
-  // the query's own `transform: none` keeps winning the cascade tie at
-  // desktop widths regardless of whether `.sidebar--open` is also applied —
-  // same specificity on both, source order decides.
   &--open {
     transform: translateY(0);
   }

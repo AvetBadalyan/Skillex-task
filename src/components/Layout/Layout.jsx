@@ -6,7 +6,6 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import './Layout.scss';
 
-// Keep in sync with $screen-desktop in src/styles/_breakpoints.scss.
 const getInitialSidebarOpen = () =>
   window.matchMedia('(min-width: 1024px)').matches;
 
