@@ -1,12 +1,12 @@
 import { useId } from 'react';
 
-function IconLogo({ mark = false, ...props }) {
+function IconLogo({ iconOnly = false, ...props }) {
   // Every <linearGradient> id must be unique in the document — the logo
   // renders more than once per page (sidebar + footer), so ids are
   // namespaced per instance instead of being hardcoded.
   const uid = useId();
 
-  if (mark) {
+  if (iconOnly) {
     const gradientId = `logo-mark-${uid}`;
     return (
       <svg

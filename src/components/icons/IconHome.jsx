@@ -1,14 +1,20 @@
+import { useId } from 'react';
+
 function IconHome(props) {
+  // IconHome renders more than once per page (sidebar tabs + bottom nav), so
+  // the clipPath id is namespaced per instance instead of being hardcoded.
+  const clipId = `icon-home-clip-${useId()}`;
+
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <g clipPath="url(#icon_home_clip)">
+      <g clipPath={`url(#${clipId})`}>
         <path
           d="M24 10.6394V18.9729C24 19.0283 24 19.0855 23.9963 19.1409V21.4228C23.9963 22.8443 22.8406 24 21.4191 24H15.7422V17.0751C15.7422 15.9508 14.8302 15.0406 13.7058 15.0406H10.2942C9.17169 15.0406 8.25969 15.9508 8.25969 17.0751V24H2.58092C1.15938 24 0.00369231 22.8443 0.00369231 21.4228V19.1409C0 19.0855 0 19.0283 0 18.9729V10.6394C0 9.11631 0.660923 7.656 1.82585 6.69416L8.28923 1.34954C10.4658 -0.450458 13.5342 -0.450458 15.7108 1.34954L22.1742 6.69416C23.3391 7.656 24 9.11631 24 10.6394Z"
           fill="currentColor"
         />
       </g>
       <defs>
-        <clipPath id="icon_home_clip">
+        <clipPath id={clipId}>
           <rect width="24" height="24" fill="white" />
         </clipPath>
       </defs>

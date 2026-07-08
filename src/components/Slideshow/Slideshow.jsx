@@ -89,10 +89,6 @@ function Slideshow() {
           preserveAspectRatio="none"
           aria-hidden="true"
         >
-          {/* Corner curves are cubic beziers with control points chosen to be
-              tangent to the straight edges they meet (vertical where they leave
-              the body, horizontal where they meet the floor) — that's what
-              makes the curve read as one continuous sweep instead of a kink. */}
           <path d="M18,0 L180,0 Q190,0 190,10 C190,21 193.6,30 198,30 L0,30 C4.4,30 8,21 8,10 Q8,0 18,0 Z" />
         </svg>
         {SLIDES.map((slide, index) => (

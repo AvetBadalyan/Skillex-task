@@ -2,9 +2,6 @@ import { useRef, useState } from 'react';
 import './SearchBox.scss';
 import { IconSearch } from '../icons';
 
-// Icon-only square by default; expands in place to a full text input on
-// focus. Shared by the desktop header and the sidebar drawer's mobile
-// header row so both get the same behavior instead of two implementations.
 function SearchBox({ placeholder = 'Search...', className = '' }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const inputRef = useRef(null);

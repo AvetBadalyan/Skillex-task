@@ -1,8 +1,3 @@
-// "Trending Artists" needs names that actually read as performers, not the
-// mood-descriptor names used for artist credits in featured.js (e.g.
-// "Golden Hour", "City Lights") — those work as an album's attribution line
-// but sound like a song title, not a band, when they're the headline. Real,
-// recognizable names and photos read better here than invented ones.
 import charlesAznavour from '../assets/artists/charles-aznavour.jpg';
 import rayCharles from '../assets/artists/ray-charles.jpg';
 import deepPurple from '../assets/artists/deep-purple.jpg';

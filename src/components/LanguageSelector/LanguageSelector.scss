@@ -48,8 +48,6 @@
   border-radius: 50%;
 }
 
-// Inside the compact (header) trigger, the flag fills the full circle —
-// its 20x20 native size matches the 24x24 button minus the 2px border exactly.
 .language-selector__trigger--compact .language-selector__flag-icon {
   width: 100%;
   height: 100%;

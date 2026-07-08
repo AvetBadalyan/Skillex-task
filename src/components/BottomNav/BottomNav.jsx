@@ -1,14 +1,8 @@
 import './BottomNav.scss';
-import { IconHome, IconFire, IconPresent, IconCrown, IconMenu } from '../icons';
+import { IconMenu } from '../icons';
+import { NAV_ITEMS } from '../../constants/navigation';
 
-const NAV_ITEMS = [
-  { id: 'home', label: 'Home', icon: IconHome },
-  { id: 'trending', label: 'Trending', icon: IconFire },
-  { id: 'discover', label: 'Discover', icon: IconPresent },
-  { id: 'favorites', label: 'Liked', icon: IconCrown },
-];
-
-function BottomNav({ onMenuToggle }) {
+function BottomNav({ onToggleSidebar }) {
   return (
     <nav className="bottom-nav" aria-label="Mobile navigation">
       <div className="bottom-nav__items">
@@ -23,7 +17,7 @@ function BottomNav({ onMenuToggle }) {
       <button
         type="button"
         className="bottom-nav__menu-toggle"
-        onClick={onMenuToggle}
+        onClick={onToggleSidebar}
         aria-label="Toggle menu"
       >
         <IconMenu className="bottom-nav__menu-icon" />

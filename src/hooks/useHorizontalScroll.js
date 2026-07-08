@@ -1,7 +1,5 @@
 import { useRef } from 'react';
 
-// Scrolls a track by one viewport width — the behavior behind each
-// SectionHeader's chevrons.
 export function useHorizontalScroll() {
   const trackRef = useRef(null);
 

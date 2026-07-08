@@ -1,10 +1,52 @@
-// Hides the native scrollbar on a horizontally-scrolling row while keeping
-// it scrollable by touch/trackpad/wheel.
 @mixin hide-scrollbar {
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@mixin horizontal-scroll-row($snap: false) {
+  display: flex;
+  overflow-x: auto;
+  @include hide-scrollbar;
+
+  @if $snap {
+    scroll-snap-type: x proximity;
+  }
+}
+
+@mixin icon-chip($size: 3.6rem) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: $size;
+  height: $size;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-control);
+  color: var(--color-text-primary);
+  transition: background-color var(--transition-base);
+
+  &:hover {
+    background-color: rgba(var(--color-accent-rgb), 0.15);
+  }
+}
+
+@mixin accent-circle-button($size: 2.4rem) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-bg-primary);
+  transition: filter var(--transition-base);
+
+  &:hover {
+    filter: brightness(1.15);
   }
 }

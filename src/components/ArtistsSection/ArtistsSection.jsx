@@ -1,10 +1,11 @@
 import './ArtistsSection.scss';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import MediaCard from '../MediaCard/MediaCard';
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import { TRENDING_ARTISTS } from '../../constants/artists';
 
 function ArtistsSection() {
-  const [trackRef, scroll] = useHorizontalScroll();
+  const [listRef, scroll] = useHorizontalScroll();
 
   return (
     <section className="artists">
@@ -14,18 +15,15 @@ function ArtistsSection() {
         onNext={() => scroll(1)}
       />
 
-      <div className="artists__list" ref={trackRef}>
+      <div className="artists__list" ref={listRef}>
         {TRENDING_ARTISTS.map((artist) => (
-          <a href="#" key={artist.id} className="artists__item">
-            <img
-              src={artist.photo}
-              alt=""
-              className="artists__portrait"
-              loading="lazy"
-            />
-            <span className="artists__name">{artist.name}</span>
-            <span className="artists__listeners">{artist.listeners}</span>
-          </a>
+          <MediaCard
+            key={artist.id}
+            image={artist.photo}
+            title={artist.name}
+            subtitle={artist.listeners}
+            imagePosition="top"
+          />
         ))}
       </div>
     </section>

@@ -1,8 +1,16 @@
+import { useId } from 'react';
+
 function IconFire(props) {
+  // IconFire renders more than once per page (sidebar menu + bottom nav), so
+  // both clipPath ids are namespaced per instance instead of being hardcoded.
+  const uid = useId();
+  const clipId0 = `icon-fire-clip0-${uid}`;
+  const clipId1 = `icon-fire-clip1-${uid}`;
+
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <g clipPath="url(#icon_fire_clip0)">
-        <g clipPath="url(#icon_fire_clip1)">
+      <g clipPath={`url(#${clipId0})`}>
+        <g clipPath={`url(#${clipId1})`}>
           <path
             d="M18.6232 7.68369C18.4634 7.52834 18.2391 7.45775 18.0196 7.49384C17.7997 7.52979 17.6098 7.66784 17.5078 7.86594C17.157 8.54745 16.7114 9.17375 16.1871 9.72739C16.2394 9.32745 16.2657 8.92512 16.2657 8.52172C16.2657 7.74767 16.162 6.95112 15.9573 6.15392C15.2842 3.53544 13.5194 1.32101 11.1154 0.0784976C10.9061 -0.029643 10.6567 -0.0258461 10.4508 0.0886226C10.2449 0.203138 10.11 0.413091 10.0916 0.647935C9.90416 3.0275 8.67847 5.19237 6.72693 6.58887C6.7011 6.60748 6.67546 6.62633 6.64982 6.64508C6.59671 6.68394 6.54664 6.72069 6.49986 6.75153C6.49255 6.7564 6.48529 6.76137 6.47816 6.76648C5.25079 7.64525 4.23805 8.81665 3.54932 10.1544C2.84947 11.5152 2.49463 12.9754 2.49463 14.4943C2.49463 15.2682 2.59836 16.0647 2.80297 16.862C3.88274 21.0647 7.6648 23.9999 12.0003 23.9999C17.2414 23.9999 21.5054 19.7357 21.5054 14.4943C21.5054 11.9097 20.4818 9.4909 18.6232 7.68369Z"
             fill="currentColor"
@@ -10,10 +18,10 @@ function IconFire(props) {
         </g>
       </g>
       <defs>
-        <clipPath id="icon_fire_clip0">
+        <clipPath id={clipId0}>
           <rect width="24" height="24" fill="white" />
         </clipPath>
-        <clipPath id="icon_fire_clip1">
+        <clipPath id={clipId1}>
           <rect width="24" height="24" fill="white" />
         </clipPath>
       </defs>

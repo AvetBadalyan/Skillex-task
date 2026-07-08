@@ -1,0 +1,48 @@
+@use '../../styles/breakpoints' as *;
+
+.media-card {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--space-8);
+  width: 12.9rem;
+  scroll-snap-align: start;
+  text-decoration: none;
+
+  @include screen-from($screen-tablet) {
+    width: 14.8rem;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 148 / 208;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-bg-card);
+    object-fit: cover;
+
+    &--top {
+      object-position: top;
+    }
+  }
+
+  &__title {
+    display: block;
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__subtitle {
+    display: block;
+    font-size: var(--text-sm);
+    line-height: var(--lh-tight);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

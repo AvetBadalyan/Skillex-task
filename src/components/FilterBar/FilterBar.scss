@@ -12,160 +12,153 @@
     align-items: center;
     gap: var(--space-12);
   }
-}
 
-.filter-bar__tabs {
-  display: flex;
-  align-items: center;
-  gap: var(--space-6);
-  overflow-x: auto;
-  order: 3;
-  @include hide-scrollbar;
+  &__tabs {
+    @include horizontal-scroll-row;
+    align-items: center;
+    gap: var(--space-6);
+    order: 3;
 
-  @include screen-from($screen-tablet) {
-    order: 2;
-    flex: 1 1 100%;
-    min-width: 0;
-  }
-}
-
-.filter-bar__tab {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  gap: var(--space-6);
-  height: 3.6rem;
-  padding: var(--space-8) var(--space-10);
-  border-radius: var(--radius-md);
-  background-color: transparent;
-  color: var(--color-text-primary);
-  font-family: var(--font-family);
-  font-size: var(--text-md);
-  font-weight: 500;
-  line-height: 1;
-  white-space: nowrap;
-  transition: background-color var(--transition-base);
-
-  &:hover {
-    background-color: var(--color-bg-control);
-  }
-
-  &--active {
-    background-color: var(--color-accent);
-    color: var(--color-bg-primary);
-
-    &:hover {
-      background-color: var(--color-accent);
+    @include screen-from($screen-tablet) {
+      order: 2;
+      flex: 1 1 100%;
+      min-width: 0;
     }
   }
-}
 
-.filter-bar__tab-icon {
-  display: block;
-  width: 1.6rem;
-  height: 1.6rem;
-  flex-shrink: 0;
-}
+  &__tab {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: var(--space-6);
+    height: 3.6rem;
+    padding: var(--space-8) var(--space-10);
+    border-radius: var(--radius-md);
+    background-color: transparent;
+    color: var(--color-text-primary);
+    font-family: var(--font-family);
+    font-size: var(--text-md);
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background-color var(--transition-base);
 
-.filter-bar__tab-dot {
-  display: block;
-  width: 1.6rem;
-  height: 1.6rem;
-  flex-shrink: 0;
-  // stroke="currentColor" on the icon itself, so it darkens along with the
-  // tab's text when the tab goes active — same behavior the home icon
-  // already gets for free from its own fill="currentColor".
-}
+    &:hover {
+      background-color: var(--color-bg-control);
+    }
 
-.filter-bar__select {
-  position: relative;
-  display: flex;
-  order: 2;
-  height: 4.4rem;
+    &--active {
+      background-color: var(--color-accent);
+      color: var(--color-bg-primary);
 
-  @include screen-from($screen-tablet) {
+      &:hover {
+        background-color: var(--color-accent);
+      }
+    }
+  }
+
+  &__tab-icon {
+    display: block;
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  &__tab-dot {
+    display: block;
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  &__select {
+    position: relative;
+    display: flex;
+    order: 2;
+    height: 4.4rem;
+
+    @include screen-from($screen-tablet) {
+      order: 1;
+      flex: 0 0 27.8rem;
+    }
+  }
+
+  &__select-input {
+    width: 100%;
+    height: 100%;
+    padding: var(--space-10) var(--space-16);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-sidebar);
+    color: var(--color-text-primary);
+    font-family: var(--font-family);
+    font-size: var(--text-md);
+    font-weight: 500;
+    appearance: none;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-border);
+    }
+  }
+
+  &__select-icon {
+    position: absolute;
+    top: 50%;
+    right: var(--space-8);
+    width: 2.4rem;
+    height: 2.4rem;
+    transform: translateY(-50%);
+    color: var(--color-text-primary);
+    pointer-events: none;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
     order: 1;
-    flex: 0 0 27.8rem;
+    height: 4.4rem;
+    padding: var(--space-10) var(--space-16);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-sidebar);
+
+    @include screen-from($screen-tablet) {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
   }
-}
 
-.filter-bar__select-input {
-  width: 100%;
-  height: 100%;
-  padding: var(--space-10) var(--space-16);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg-sidebar);
-  color: var(--color-text-primary);
-  font-family: var(--font-family);
-  font-size: var(--text-md);
-  font-weight: 500;
-  appearance: none;
-
-  &:focus {
-    outline: none;
-    border-color: var(--color-border);
-  }
-}
-
-.filter-bar__select-icon {
-  position: absolute;
-  top: 50%;
-  right: var(--space-8);
-  width: 2.4rem;
-  height: 2.4rem;
-  transform: translateY(-50%);
-  color: var(--color-text-primary);
-  pointer-events: none;
-}
-
-.filter-bar__search {
-  display: flex;
-  align-items: center;
-  gap: var(--space-8);
-  order: 1;
-  height: 4.4rem;
-  padding: var(--space-10) var(--space-16);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg-sidebar);
-
-  @include screen-from($screen-tablet) {
-    flex: 1 1 auto;
+  &__search-input {
+    flex: 1;
     min-width: 0;
+    height: 100%;
+    border: none;
+    background: transparent;
+    color: var(--color-text-primary);
+    font-family: var(--font-family);
+    font-size: var(--text-lg);
+    line-height: var(--lh-4-3);
+
+    &::placeholder {
+      color: var(--color-border-strong);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
+    }
   }
-}
 
-.filter-bar__search-input {
-  flex: 1;
-  min-width: 0;
-  height: 100%;
-  border: none;
-  background: transparent;
-  color: var(--color-text-primary);
-  font-family: var(--font-family);
-  font-size: var(--text-lg);
-  line-height: var(--lh-4-3);
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.2);
+  &__search-icon {
+    display: block;
+    width: 2.4rem;
+    height: 2.4rem;
+    flex-shrink: 0;
+    color: var(--color-text-primary);
   }
-
-  &:focus {
-    outline: none;
-  }
-
-  // Remove the native clear ("x") button so it doesn't collide with our own
-  // trailing search icon.
-  &::-webkit-search-cancel-button {
-    display: none;
-  }
-}
-
-.filter-bar__search-icon {
-  display: block;
-  width: 2.4rem;
-  height: 2.4rem;
-  flex-shrink: 0;
-  color: var(--color-text-primary);
 }

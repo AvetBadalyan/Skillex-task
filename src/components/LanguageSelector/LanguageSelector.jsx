@@ -10,10 +10,6 @@ const LANGUAGES = [
   { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
 ];
 
-// Only English has a real flag asset (from Figma) — the rest fall back to an
-// emoji flag rather than spending time sourcing three more icon assets.
-// It's a fixed raster image (not a recolorable line icon), so it's loaded
-// as a plain asset via <img>, same pattern as the payment logos.
 function renderFlag(language) {
   if (language.code === 'en') {
     return <img src={flagUK} alt="" className="language-selector__flag-icon" />;

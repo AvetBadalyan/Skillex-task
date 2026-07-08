@@ -5,110 +5,270 @@
   flex-shrink: 0;
   background-color: var(--color-bg-sidebar);
   border-top: 1px solid var(--color-border);
-}
 
-.footer__inner {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-36);
-  padding: var(--space-32) var(--space-16);
-  max-width: var(--content-max-width);
-  margin: 0 auto;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-36);
+    padding: var(--space-32) var(--space-16);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
 
-  @include screen-from($screen-tablet) {
-    padding: var(--space-32);
+    @include screen-from($screen-tablet) {
+      padding: var(--space-32);
+    }
   }
-}
 
-.footer__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-16);
-}
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-16);
+  }
 
-.footer__logo {
-  display: block;
-  width: 12.9rem;
-  height: auto;
-}
+  &__logo {
+    display: block;
+    width: 12.9rem;
+    height: auto;
+  }
 
-// Mobile: sections stack as full-width accordions, social sits below them.
-// Tablet+: "display: contents" unwraps .footer__sections so each section
-// becomes a direct sibling of .footer__social inside the same flex row —
-// this is what puts social icons level with the link columns instead of
-// pushed onto their own row underneath.
-.footer__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-32);
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-32);
 
-  @include screen-from($screen-tablet) {
-    flex-direction: row;
-    flex-wrap: wrap;
+    @include screen-from($screen-tablet) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: var(--space-24);
+    }
+  }
+
+  &__sections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+
+    @include screen-from($screen-tablet) {
+      display: contents;
+    }
+  }
+
+  &__section {
+    @include screen-from($screen-tablet) {
+      flex: 1 1 12rem;
+    }
+  }
+
+  &__section-title {
+    margin: 0;
+    font-size: var(--heading-05);
+    font-weight: 600;
+    line-height: var(--lh-snug);
+    color: var(--color-footer-heading);
+  }
+
+  &__section-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+    width: 100%;
+    margin-bottom: var(--space-10);
+
+    @include screen-from($screen-tablet) {
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  &__section-chevron {
+    display: block;
+    box-sizing: border-box;
+    width: 3.6rem;
+    height: 3.6rem;
+    padding: var(--space-8);
+    flex-shrink: 0;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background-color: var(--color-bg-control);
+    color: var(--color-text-primary);
+    transition: transform var(--transition-base);
+
+    @include screen-from($screen-tablet) {
+      display: none;
+    }
+  }
+
+  &__section-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height var(--transition-base);
+
+    @include screen-from($screen-tablet) {
+      max-height: none;
+    }
+  }
+
+  &__link {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-base);
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+
+  &__social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-10);
+
+    @include screen-from($screen-tablet) {
+      flex: 1 1 16rem;
+    }
+  }
+
+  &__social-title {
+    margin: 0;
+    font-size: var(--heading-05);
+    font-weight: 600;
+    line-height: var(--lh-snug);
+    color: var(--color-footer-heading);
+  }
+
+  &__social-items {
+    display: flex;
+    gap: var(--space-12);
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.6rem;
+    height: 3.6rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background-color: var(--color-bg-control);
+    color: var(--color-text-primary);
+    transition:
+      background-color var(--transition-base),
+      color var(--transition-base);
+
+    &:hover {
+      background-color: var(--color-text-primary);
+      color: var(--color-bg-primary);
+    }
+  }
+
+  &__social-icon {
+    display: block;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  &__payments {
+    @include horizontal-scroll-row;
+    align-items: center;
+    gap: var(--space-36);
+    min-height: 6.2rem;
+    padding: var(--space-24) 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+
+    @include screen-from($screen-tablet) {
+      gap: 5.4rem;
+    }
+  }
+
+  &__payment-logo {
+    display: block;
+    flex-shrink: 0;
+    height: 2.4rem;
+    width: auto;
+
+    &--emblem {
+      height: 4.6rem;
+    }
+  }
+
+  &__legal {
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
     gap: var(--space-24);
+
+    @include screen-from($screen-tablet) {
+      flex-direction: row;
+      align-items: center;
+      gap: 1.8rem;
+    }
   }
-}
 
-.footer__sections {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-
-  @include screen-from($screen-tablet) {
-    display: contents;
+  &__legal-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
   }
-}
 
-.footer__section {
-  @include screen-from($screen-tablet) {
-    flex: 1 1 12rem;
+  &__disclaimer {
+    margin: 0;
+    max-width: 80.5rem;
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
   }
-}
 
-.footer__section-title {
-  margin: 0;
-  font-size: var(--heading-05);
-  font-weight: 600;
-  line-height: var(--lh-snug);
-  color: var(--color-footer-heading);
-}
+  &__legal-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: var(--space-16);
 
-// On mobile each section is a collapsible accordion; from tablet up it's
-// always expanded and the toggle button just renders as a plain heading.
-.footer__section-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-8);
-  width: 100%;
-  margin-bottom: var(--space-10);
-
-  @include screen-from($screen-tablet) {
-    cursor: default;
-    pointer-events: none;
+    @include screen-from($screen-tablet) {
+      width: auto;
+      justify-content: flex-start;
+    }
   }
-}
 
-// A bordered 36x36 chip, not a bare icon — 8px padding on a 36px box leaves
-// exactly a 20x20 content-box, matching the chevron's own viewBox 1:1 with
-// no scaling.
-.footer__section-chevron {
-  display: block;
-  box-sizing: border-box;
-  width: 3.6rem;
-  height: 3.6rem;
-  padding: var(--space-8);
-  flex-shrink: 0;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border-subtle);
-  background-color: var(--color-bg-control);
-  color: var(--color-text-primary);
-  transition: transform var(--transition-base);
+  &__age-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 4.6rem;
+    height: 4.6rem;
+  }
 
-  @include screen-from($screen-tablet) {
-    display: none;
+  &__age-badge-icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__scroll-top {
+    @include icon-chip(4rem);
+
+    @include screen-from($screen-tablet) {
+      display: none;
+    }
+  }
+
+  &__scroll-top-icon {
+    display: block;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -116,207 +276,6 @@
   transform: rotate(180deg);
 }
 
-.footer__section-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height var(--transition-base);
-
-  @include screen-from($screen-tablet) {
-    max-height: none;
-  }
-}
-
 .footer__section--open .footer__section-list {
   max-height: 40rem;
-}
-
-.footer__link {
-  font-size: var(--text-base);
-  color: var(--color-text-muted);
-  text-decoration: none;
-  transition: color var(--transition-base);
-
-  &:hover {
-    color: var(--color-accent);
-  }
-}
-
-.footer__social {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-10);
-
-  @include screen-from($screen-tablet) {
-    flex: 1 1 16rem;
-  }
-}
-
-.footer__social-title {
-  margin: 0;
-  font-size: var(--heading-05);
-  font-weight: 600;
-  line-height: var(--lh-snug);
-  color: var(--color-footer-heading);
-}
-
-.footer__social-items {
-  display: flex;
-  gap: var(--space-12);
-}
-
-.footer__social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3.6rem;
-  height: 3.6rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border-subtle);
-  background-color: var(--color-bg-control);
-  color: var(--color-text-primary);
-  transition:
-    background-color var(--transition-base),
-    color var(--transition-base);
-
-  &:hover {
-    background-color: var(--color-text-primary);
-    color: var(--color-bg-primary);
-  }
-}
-
-.footer__social-icon {
-  display: block;
-  width: 1.6rem;
-  height: 1.6rem;
-}
-
-// Brand logo strip: framed in its own bordered box (top + bottom divider),
-// not just a single divider above it. The row of logos doesn't reliably fit
-// one line at every viewport width Figma's own frame does (mastercard's
-// emblem alone is wider than the wordmark logos), so — same as every other
-// row on this page that can overflow — it scrolls horizontally instead of
-// wrapping to a second line.
-.footer__payments {
-  display: flex;
-  align-items: center;
-  overflow-x: auto;
-  @include hide-scrollbar;
-  // Figma: 36px gap on mobile (--space-36 already exists), 54px from tablet
-  // up (not on the scale, so inlined rather than adding a single-use token).
-  gap: var(--space-36);
-  min-height: 6.2rem;
-  padding: var(--space-24) 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-
-  @include screen-from($screen-tablet) {
-    gap: 5.4rem;
-  }
-}
-
-.footer__payment-logo {
-  display: block;
-  flex-shrink: 0;
-  height: 2.4rem;
-  width: auto;
-}
-
-// Mastercard's mark is a circular emblem with no wordmark, so constrained
-// to the same 24px height as the wordmark logos it reads as barely visible
-// — Figma gives it roughly double the height to carry equivalent visual
-// weight in the row.
-.footer__payment-logo--emblem {
-  height: 4.6rem;
-}
-
-.footer__legal {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-24);
-
-  @include screen-from($screen-tablet) {
-    flex-direction: row;
-    align-items: center;
-    // Figma: 18px between the disclaimer text and the age badge — not on
-    // the space-* scale, so inlined like the payment-logo gap above.
-    gap: 1.8rem;
-  }
-}
-
-.footer__legal-text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-}
-
-.footer__disclaimer {
-  margin: 0;
-  max-width: 80.5rem;
-  font-size: var(--text-lg);
-  color: var(--color-text-muted);
-}
-
-.footer__legal-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  gap: var(--space-16);
-
-  @include screen-from($screen-tablet) {
-    width: auto;
-    justify-content: flex-start;
-  }
-}
-
-.footer__age-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 4.6rem;
-  height: 4.6rem;
-}
-
-.footer__age-badge-icon {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-// Mobile-only "back to top" — swipe-scrolling a long footer back up is
-// tedious on a phone; desktop has no equivalent control in Figma.
-.footer__scroll-top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 4rem;
-  height: 4rem;
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg-control);
-  color: var(--color-text-primary);
-  transition: background-color var(--transition-base);
-
-  &:hover {
-    background-color: rgba(var(--color-accent-rgb), 0.15);
-  }
-
-  @include screen-from($screen-tablet) {
-    display: none;
-  }
-}
-
-.footer__scroll-top-icon {
-  display: block;
-  width: 2rem;
-  height: 2rem;
 }

@@ -1,7 +1,11 @@
+import { useId } from 'react';
+
 function IconTelegram(props) {
+  const clipId = `icon-telegram-clip-${useId()}`;
+
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <g clipPath="url(#icon_telegram_clip)">
+      <g clipPath={`url(#${clipId})`}>
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -10,7 +14,7 @@ function IconTelegram(props) {
         />
       </g>
       <defs>
-        <clipPath id="icon_telegram_clip">
+        <clipPath id={clipId}>
           <rect width="16" height="16" fill="white" />
         </clipPath>
       </defs>

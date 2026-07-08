@@ -4,64 +4,58 @@
 .labels {
   display: flex;
   flex-direction: column;
-}
 
-// Wrapper for the fade mask: the track itself needs `overflow-x: auto` to
-// scroll, so the right-edge gradient lives on a sibling layer instead of an
-// ::after on the track, otherwise it would scroll away with the content.
-.labels__fade {
-  position: relative;
+  &__fade {
+    position: relative;
 
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0 0 0 auto;
-    width: 4.8rem;
-    background: linear-gradient(to right, transparent, var(--color-bg-primary));
-    pointer-events: none;
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: 4.8rem;
+      background: linear-gradient(
+        to right,
+        transparent,
+        var(--color-bg-primary)
+      );
+      pointer-events: none;
 
-    @include screen-from($screen-tablet) {
-      width: 6.4rem;
+      @include screen-from($screen-tablet) {
+        width: 6.4rem;
+      }
     }
   }
-}
 
-.labels__track {
-  display: flex;
-  gap: var(--space-8);
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  @include hide-scrollbar;
-}
+  &__track {
+    @include horizontal-scroll-row(true);
+    gap: var(--space-8);
+  }
 
-.labels__item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  overflow: hidden;
-  // Figma gives 98x47 on mobile and 126x56 from tablet up — the ratios
-  // aren't proportional (2.09 vs 2.25), so this is two fixed sizes rather
-  // than one fixed width plus an aspect-ratio, same reasoning as elsewhere
-  // in this file for content whose Figma sizes don't scale uniformly.
-  width: 9.8rem;
-  height: 4.7rem;
-  padding: 0 var(--space-8);
-  background-color: var(--color-bg-header);
-  border-radius: var(--radius-lg);
-  scroll-snap-align: start;
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  text-align: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 9.8rem;
+    height: 4.7rem;
+    padding: 0 var(--space-8);
+    background-color: var(--color-bg-header);
+    border-radius: var(--radius-lg);
+    scroll-snap-align: start;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
-  @include screen-from($screen-tablet) {
-    width: 12.6rem;
-    height: 5.6rem;
-    font-size: var(--text-md);
+    @include screen-from($screen-tablet) {
+      width: 12.6rem;
+      height: 5.6rem;
+      font-size: var(--text-md);
+    }
   }
 }

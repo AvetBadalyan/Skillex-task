@@ -12,27 +12,27 @@
     overflow: hidden;
     padding-bottom: 0;
   }
-}
 
-.layout__body {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
+  &__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
 
-  @include screen-from($screen-desktop) {
-    height: 100dvh;
-    overflow: hidden;
+    @include screen-from($screen-desktop) {
+      height: 100dvh;
+      overflow: hidden;
+    }
   }
-}
 
-.layout__scroll {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  &__scroll {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 
-  @include screen-from($screen-desktop) {
-    overflow-y: auto;
-    overscroll-behavior: contain;
+    @include screen-from($screen-desktop) {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
   }
 }

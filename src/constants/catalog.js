@@ -1,28 +1,4 @@
-// Single source of truth for the catalog. Two things define it:
-// - CATEGORIES_BY_FORMAT: which category tabs FilterBar shows per format.
-// - CATALOG_ITEMS: one flat list of items, each tagged with a format and a
-//   category, which TopCharts filters directly.
-// To add a format: add one FORMATS entry, one CATEGORIES_BY_FORMAT entry,
-// and tag some items with that format below.
-import waveform from '../assets/top-charts/waveform.svg';
-import vinyl from '../assets/top-charts/vinyl.svg';
-import headphones from '../assets/top-charts/headphones.svg';
-import equalizer from '../assets/top-charts/equalizer.svg';
-import note from '../assets/top-charts/note.svg';
-import radioWave from '../assets/top-charts/radio-wave.svg';
-import speaker from '../assets/top-charts/speaker.svg';
-import mic from '../assets/top-charts/mic.svg';
-
-const COVERS = [
-  waveform,
-  vinyl,
-  headphones,
-  equalizer,
-  note,
-  radioWave,
-  speaker,
-  mic,
-];
+import { pickCover } from './covers';
 
 export const ALL_ID = 'all';
 
@@ -34,9 +10,6 @@ export const FORMATS = [
   { id: 'audiobooks', label: 'Audiobooks' },
 ];
 
-// Category tabs shown in FilterBar for each format. Music formats share one
-// genre list; podcasts and audiobooks get their own topics instead, since
-// "Rock" doesn't mean anything for a podcast.
 const MUSIC_GENRES = [
   { id: 'all', label: 'All' },
   { id: 'pop', label: 'Pop' },
@@ -75,8 +48,6 @@ export const CATEGORIES_BY_FORMAT = {
   audiobooks: AUDIOBOOK_TOPICS,
 };
 
-// Items grouped by format here just for readability — flattened into one
-// array below, which is what components actually read.
 const ITEMS_BY_FORMAT = {
   all: [
     { title: 'Golden Hour', meta: '19.3K', category: 'pop' },
@@ -198,17 +169,12 @@ const ITEMS_BY_FORMAT = {
   ],
 };
 
-// Tags one format's items with that format, a unique id, and a cover image.
-// We only have 8 cover placeholders but some formats have 32 items, so
-// `% COVERS.length` wraps back to COVERS[0] once we run past COVERS[7] —
-// without it, item 9 onward would try to read COVERS[8], which doesn't
-// exist, and render a broken image.
 function tagItems(format, items) {
   return items.map((item, index) => ({
     ...item,
     format,
     id: `${format}-${index}`,
-    cover: COVERS[index % COVERS.length],
+    cover: pickCover(index),
   }));
 }
 

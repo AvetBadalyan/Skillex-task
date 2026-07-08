@@ -11,24 +11,25 @@
   --color-accent-rgb: 255, 155, 4;
   --color-bg-promo: #5738ad;
 
-  /* Figma's "warning" family — a separate token group from --color-accent,
-     used only for the sidebar's active Home-tab gradient. */
-  --color-warning-start: #7a2e0e; /* warning/02 */
-  --color-warning-end: #b54708; /* warning/04 */
+  --color-tab-active-start: #7a2e0e;
+  --color-tab-active-end: #b54708;
 
   --color-text-primary: #fafafa;
   --color-text-muted: #c4c0c0;
-  --color-text-nav-label: #aaa6a6; /* sidebar/item/text/default — sidebar menu link labels only */
-  --color-footer-heading: #dcdada; /* footer/txt/02 — footer section/social headings only, slightly dimmer than --color-text-primary */
+  --color-text-nav-label: #aaa6a6;
+  --color-footer-heading: #dcdada;
 
   --color-border: #393737;
   --color-border-subtle: rgba(255, 255, 255, 0.15);
   --color-border-faint: rgba(255, 255, 255, 0.07);
   --color-border-header: rgba(255, 255, 255, 0.03);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
 
-  /* Sidebar nav "card" background — Figma token transparent/02, a 7% white
-     tint over the sidebar background rather than a flat color, so it stays
-     correct if --color-bg-sidebar ever changes. */
+  /* R, G, B channels of --color-bg-primary, for rgba() tints — keep in sync */
+  --color-bg-primary-rgb: 13, 12, 12;
+
+  --color-scrim: rgba(0, 0, 0, 0.5);
+
   --color-bg-nav-container: rgba(255, 255, 255, 0.07);
 
   --shadow-default: 0 2px 16px rgba(8, 8, 7, 0.1);
@@ -38,8 +39,6 @@
   --sidebar-width: 24rem;
   --sidebar-width-collapsed: 7.2rem;
   --header-height: 6.4rem;
-  /* Caps content area to the Figma canvas width (1440px) so pages don't
-     stretch edge-to-edge on ultra-wide viewports. */
   --content-max-width: 144rem;
 
   --space-4: 0.4rem;
@@ -73,12 +72,14 @@
 
   --lh-tight: 1.25;
   --lh-snug: 1.4;
-  --lh-4-3: calc(4 / 3); /* e.g. 18px/24px, 24px/32px */
+  --lh-4-3: calc(4 / 3);
 
   --transition-base: 200ms ease;
   --transition-sidebar: 250ms ease;
 
+  // Sidebar drawer + backdrop must stay above the header, so ascending
+  // order here matters: bottom nav < header < sidebar.
   --z-bottom-nav: 90;
-  --z-sidebar: 100;
-  --z-header: 200;
+  --z-header: 100;
+  --z-sidebar: 200;
 }

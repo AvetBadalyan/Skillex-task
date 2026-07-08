@@ -1,5 +1,6 @@
 import './FeaturedSection.scss';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import MediaCard from '../MediaCard/MediaCard';
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import { FEATURED_PLAYLISTS, NEW_RELEASES } from '../../constants/featured';
 
@@ -16,16 +17,12 @@ function FeaturedSection() {
 
       <div className="featured__releases" ref={releasesRef}>
         {NEW_RELEASES.map((release) => (
-          <a href="#" key={release.id} className="featured__release">
-            <img
-              src={release.cover}
-              alt=""
-              className="featured__release-image"
-              loading="lazy"
-            />
-            <span className="featured__release-title">{release.title}</span>
-            <span className="featured__release-artist">{release.artist}</span>
-          </a>
+          <MediaCard
+            key={release.id}
+            image={release.cover}
+            title={release.title}
+            subtitle={release.artist}
+          />
         ))}
       </div>
 

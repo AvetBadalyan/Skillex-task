@@ -6,9 +6,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import './Layout.scss';
 
-// 1024px matches $screen-desktop in src/styles/_breakpoints.scss. The
-// desktop rail starts expanded; the mobile/tablet off-canvas drawer starts
-// closed — same isOpen flag, different default per breakpoint.
+// Keep in sync with $screen-desktop in src/styles/_breakpoints.scss.
 const getInitialSidebarOpen = () =>
   window.matchMedia('(min-width: 1024px)').matches;
 
@@ -30,7 +28,7 @@ function Layout() {
         </div>
       </div>
 
-      <BottomNav onMenuToggle={toggleSidebar} />
+      <BottomNav onToggleSidebar={toggleSidebar} />
     </div>
   );
 }

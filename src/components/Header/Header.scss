@@ -1,4 +1,5 @@
 @use '../../styles/breakpoints' as *;
+@use '../../styles/mixins' as *;
 
 .header {
   flex-shrink: 0;
@@ -12,186 +13,165 @@
   @include screen-from($screen-desktop) {
     position: static;
   }
-}
 
-.header__inner {
-  display: flex;
-  align-items: center;
-  gap: var(--space-16);
-  height: var(--header-height);
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-  padding: var(--space-12) var(--space-20);
-}
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16);
+    height: var(--header-height);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: var(--space-12) var(--space-20);
+  }
 
-// The sidebar drawer (with its own logo) is off-canvas on mobile/tablet, so
-// the header carries a logo of its own there; redundant once the sidebar
-// becomes a persistent rail on desktop.
-.header__logo-link {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
+  &__logo-link {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 
-  @include screen-from($screen-desktop) {
+    @include screen-from($screen-desktop) {
+      display: none;
+    }
+  }
+
+  &__logo {
+    display: block;
+    width: 9.6rem;
+    height: auto;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__search.search-box {
     display: none;
-  }
-}
 
-.header__logo {
-  display: block;
-  width: 9.6rem;
-  height: auto;
-}
-
-.header__left {
-  display: flex;
-  align-items: center;
-  gap: var(--space-8);
-  flex: 1;
-  min-width: 0;
-}
-
-// The sidebar drawer owns the search box on mobile/tablet (next to its own
-// toggle); it only lives in the header once the sidebar becomes a rail.
-// Compounded with .search-box so it reliably wins over that class's own
-// `display: flex`, regardless of which stylesheet loads second.
-.header__search.search-box {
-  display: none;
-
-  @include screen-from($screen-desktop) {
-    display: flex;
-  }
-}
-
-.header__icon-btn {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  gap: var(--space-8);
-  height: 4rem;
-  padding: var(--space-10) var(--space-8);
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg-promo);
-  color: var(--color-footer-heading);
-  font-family: var(--font-family);
-  font-size: var(--text-md);
-  font-weight: 500;
-  line-height: var(--lh-snug);
-  transition: filter var(--transition-base);
-
-  &:hover {
-    filter: brightness(1.15);
+    @include screen-from($screen-desktop) {
+      display: flex;
+    }
   }
 
-  @include screen-from($screen-tablet) {
-    display: inline-flex;
-  }
-}
-
-.header__icon-btn-icon {
-  display: block;
-  width: 2rem;
-  height: 2rem;
-  flex-shrink: 0;
-}
-
-.header__icon-btn-label {
-  white-space: nowrap;
-}
-
-.header__right {
-  display: flex;
-  align-items: center;
-  gap: var(--space-8);
-  margin-left: auto;
-  flex-shrink: 0;
-}
-
-// The sidebar drawer carries language/settings on mobile/tablet instead.
-.header__utility {
-  display: none;
-  align-items: center;
-  gap: var(--space-8);
-  height: 4rem;
-  padding: 0 var(--space-8);
-  border-radius: var(--radius-md);
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border-faint);
-
-  @include screen-from($screen-desktop) {
-    display: flex;
-  }
-}
-
-.header__utility-divider {
-  width: 1px;
-  height: 2.8rem;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.header__utility-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 2.4rem;
-  height: 2.4rem;
-  border-radius: 50%;
-  background-color: var(--color-accent);
-  color: var(--color-bg-primary);
-  transition: filter var(--transition-base);
-
-  &:hover {
-    filter: brightness(1.15);
-  }
-}
-
-.header__utility-icon {
-  display: block;
-  width: 1.4rem;
-  height: 1.4rem;
-  flex-shrink: 0;
-}
-
-.header__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 3.6rem;
-  padding: 0 var(--space-8);
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
-  font-family: var(--font-family);
-  font-size: var(--text-md);
-  font-weight: 500;
-  cursor: pointer;
-  transition:
-    background-color var(--transition-base),
-    border-color var(--transition-base),
-    filter var(--transition-base);
-
-  @include screen-from($screen-tablet) {
+  &__icon-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    gap: var(--space-8);
     height: 4rem;
-    padding: 0 var(--space-12);
-    font-size: var(--text-base);
-  }
-
-  &--primary {
-    background-color: var(--color-accent);
-    color: var(--color-bg-primary);
+    padding: var(--space-10) var(--space-8);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-promo);
+    color: var(--color-footer-heading);
+    font-family: var(--font-family);
+    font-size: var(--text-md);
+    font-weight: 500;
+    line-height: var(--lh-snug);
+    transition: filter var(--transition-base);
 
     &:hover {
       filter: brightness(1.15);
     }
+
+    @include screen-from($screen-tablet) {
+      display: inline-flex;
+    }
   }
 
-  &--secondary {
-    background-color: var(--color-text-primary);
-    color: var(--color-bg-primary);
+  &__icon-btn-icon {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+  }
 
-    &:hover {
-      filter: brightness(0.92);
+  &__icon-btn-label {
+    white-space: nowrap;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  &__utility {
+    display: none;
+    align-items: center;
+    gap: var(--space-8);
+    height: 4rem;
+    padding: 0 var(--space-8);
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border-faint);
+
+    @include screen-from($screen-desktop) {
+      display: flex;
+    }
+  }
+
+  &__utility-divider {
+    width: 1px;
+    height: 2.8rem;
+    background-color: var(--color-border-strong);
+  }
+
+  &__utility-btn {
+    @include accent-circle-button;
+  }
+
+  &__utility-icon {
+    display: block;
+    width: 1.4rem;
+    height: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.6rem;
+    padding: 0 var(--space-8);
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    font-family: var(--font-family);
+    font-size: var(--text-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background-color var(--transition-base),
+      border-color var(--transition-base),
+      filter var(--transition-base);
+
+    @include screen-from($screen-tablet) {
+      height: 4rem;
+      padding: 0 var(--space-12);
+      font-size: var(--text-base);
+    }
+
+    &--primary {
+      background-color: var(--color-accent);
+      color: var(--color-bg-primary);
+
+      &:hover {
+        filter: brightness(1.15);
+      }
+    }
+
+    &--secondary {
+      background-color: var(--color-text-primary);
+      color: var(--color-bg-primary);
+
+      &:hover {
+        filter: brightness(0.92);
+      }
     }
   }
 }

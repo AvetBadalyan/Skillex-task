@@ -12,9 +12,6 @@ function Main() {
   const [activeCategory, setActiveCategory] = useState(ALL_ID);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Each format has its own category taxonomy (music genres vs. podcast
-  // topics, etc.), so a category picked under one format wouldn't mean
-  // anything under another — reset back to "All" whenever the format changes.
   const handleFormatChange = (formatId) => {
     setActiveFormat(formatId);
     setActiveCategory(ALL_ID);
