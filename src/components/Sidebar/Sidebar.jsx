@@ -1,26 +1,10 @@
 import { useEffect, useState } from 'react';
 import './Sidebar.scss';
-import {
-  IconMenu,
-  IconHome,
-  IconLogo,
-  IconSun,
-  IconMoon,
-  IconSettings,
-} from '../icons';
+import { IconMenu, IconHome, IconLogo, IconSettings } from '../icons';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import SearchBox from '../SearchBox/SearchBox';
 import { NAV_ITEMS } from '../../constants/navigation';
-
-const HOME_TABS = [
-  { id: 'home-1', label: 'Home 1' },
-  { id: 'home-2', label: 'Home 2' },
-];
-
-const THEME_OPTIONS = [
-  { id: 'light', label: 'Light', icon: IconSun },
-  { id: 'dark', label: 'Dark', icon: IconMoon },
-];
+import { HOME_TABS, THEME_OPTIONS } from '../../constants/sidebar';
 
 function Sidebar({ isOpen, onToggle }) {
   const [activeTab, setActiveTab] = useState(HOME_TABS[1].id);

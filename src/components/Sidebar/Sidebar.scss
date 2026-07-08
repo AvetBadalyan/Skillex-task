@@ -183,7 +183,11 @@
     padding: var(--space-8) var(--space-6);
     border-radius: var(--radius-md);
     box-shadow: inset 0 0 0 1px var(--color-border-subtle);
-    background: radial-gradient(120% 120% at 0% 0%, #2a2828 0%, #4e4b4b 100%);
+    background: radial-gradient(
+      120% 120% at 0% 0%,
+      var(--color-tab-idle-start) 0%,
+      var(--color-tab-idle-end) 100%
+    );
     color: var(--color-text-primary);
     transition:
       opacity var(--transition-base),
@@ -225,7 +229,7 @@
     opacity: 1;
     max-width: 10rem;
     transition:
-      opacity var(--transition-sidebar),
+      opacity var(--transition-label),
       max-width var(--transition-sidebar);
 
     @include collapsed {
@@ -327,7 +331,7 @@
     opacity: 1;
     max-width: 16rem;
     transition:
-      opacity var(--transition-sidebar),
+      opacity var(--transition-label),
       max-width var(--transition-sidebar);
 
     @include collapsed {
@@ -397,7 +401,7 @@
     opacity: 1;
     max-width: 8rem;
     transition:
-      opacity var(--transition-sidebar),
+      opacity var(--transition-label),
       max-width var(--transition-sidebar);
 
     @include collapsed {

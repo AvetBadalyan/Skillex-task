@@ -20,3 +20,4 @@ export { default as IconMoon } from './IconMoon';
 export { default as IconLogo } from './IconLogo';
 export { default as IconAgeBadge } from './IconAgeBadge';
 export { default as IconArrowUp } from './IconArrowUp';
+export { default as IconSlideshowDots } from './IconSlideshowDots';

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { IconSlideshowDots } from '../icons';
 import './Slideshow.scss';
 import liveTheMusic from '../../assets/slideshow/live-the-music.jpg';
 import yourMusicYourWay from '../../assets/slideshow/your-music-your-way.jpg';
@@ -83,14 +84,7 @@ function Slideshow() {
       </div>
 
       <div className="slideshow__dots">
-        <svg
-          className="slideshow__dots-shape"
-          viewBox="0 0 198 30"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path d="M18,0 L180,0 Q190,0 190,10 C190,21 193.6,30 198,30 L0,30 C4.4,30 8,21 8,10 Q8,0 18,0 Z" />
-        </svg>
+        <IconSlideshowDots className="slideshow__dots-shape" />
         {SLIDES.map((slide, index) => (
           <button
             key={slide.id}

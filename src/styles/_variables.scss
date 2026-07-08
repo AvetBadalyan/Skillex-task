@@ -12,8 +12,11 @@
 
   --color-tab-active-start: #7a2e0e;
   --color-tab-active-end: #b54708;
+  --color-tab-idle-start: #2a2828;
+  --color-tab-idle-end: #4e4b4b;
 
   --color-white: #ffffff;
+  --color-white-rgb: 255, 255, 255;
   --color-text-primary: #fafafa;
   --color-text-muted: #c4c0c0;
   --color-text-nav-label: #aaa6a6;
@@ -73,8 +76,10 @@
   --lh-snug: 1.4;
   --lh-4-3: calc(4 / 3);
 
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 200ms ease;
-  --transition-sidebar: 0.3s ease-in-out;
+  --transition-sidebar: 0.25s var(--ease-standard);
+  --transition-label: 0.12s ease-out;
 
   // bottom nav < header < sidebar.
   --z-bottom-nav: 90;
