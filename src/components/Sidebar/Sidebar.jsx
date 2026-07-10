@@ -40,6 +40,7 @@ function Sidebar({ isOpen, onToggle }) {
             className="sidebar__toggle"
             onClick={onToggle}
             aria-label="Toggle sidebar"
+            aria-expanded={isOpen}
           >
             <IconMenu className="sidebar__toggle-icon" />
           </button>

@@ -2,7 +2,7 @@ import './BottomNav.scss';
 import { IconMenu } from '../icons';
 import { NAV_ITEMS } from '../../constants/navigation';
 
-function BottomNav({ onToggleSidebar }) {
+function BottomNav({ isSidebarOpen, onToggleSidebar }) {
   return (
     <nav className="bottom-nav" aria-label="Mobile navigation">
       <div className="bottom-nav__items">
@@ -19,6 +19,7 @@ function BottomNav({ onToggleSidebar }) {
         className="bottom-nav__menu-toggle"
         onClick={onToggleSidebar}
         aria-label="Toggle menu"
+        aria-expanded={isSidebarOpen}
       >
         <IconMenu className="bottom-nav__menu-icon" />
         <span className="bottom-nav__menu-label">Menu</span>

@@ -31,8 +31,8 @@ function IconLogo({ iconOnly = false, ...props }) {
             y2="20.5"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#FF9B04" />
-            <stop offset="1" stopColor="#FF7200" />
+            <stop style={{ stopColor: 'var(--color-accent)' }} />
+            <stop offset="1" style={{ stopColor: 'var(--color-accent-dark)' }} />
           </linearGradient>
         </defs>
       </svg>
@@ -79,8 +79,8 @@ function IconLogo({ iconOnly = false, ...props }) {
           y2="17.6888"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FF9B04" />
-          <stop offset="1" stopColor="#FF7200" />
+          <stop style={{ stopColor: 'var(--color-accent)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--color-accent-dark)' }} />
         </linearGradient>
         <linearGradient
           id={id1}
@@ -90,8 +90,8 @@ function IconLogo({ iconOnly = false, ...props }) {
           y2="17.6843"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FF9B04" />
-          <stop offset="1" stopColor="#FF7200" />
+          <stop style={{ stopColor: 'var(--color-accent)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--color-accent-dark)' }} />
         </linearGradient>
         <linearGradient
           id={id2}
@@ -101,8 +101,8 @@ function IconLogo({ iconOnly = false, ...props }) {
           y2="17.6815"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FF9B04" />
-          <stop offset="1" stopColor="#FF7200" />
+          <stop style={{ stopColor: 'var(--color-accent)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--color-accent-dark)' }} />
         </linearGradient>
         <linearGradient
           id={id3}
@@ -112,8 +112,8 @@ function IconLogo({ iconOnly = false, ...props }) {
           y2="17.6888"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FF9B04" />
-          <stop offset="1" stopColor="#FF7200" />
+          <stop style={{ stopColor: 'var(--color-accent)' }} />
+          <stop offset="1" style={{ stopColor: 'var(--color-accent-dark)' }} />
         </linearGradient>
       </defs>
     </svg>
