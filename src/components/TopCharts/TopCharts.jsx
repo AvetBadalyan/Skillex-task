@@ -1,16 +1,19 @@
+import { useState } from 'react';
 import './TopCharts.scss';
 import { IconPrize, IconCrown } from '../icons';
 import { CATALOG_ITEMS, ALL_ID } from '../../constants/catalog';
 import FilterBar from '../FilterBar/FilterBar';
 
-function TopCharts({
-  activeFormat,
-  onFormatChange,
-  activeCategory,
-  onCategoryChange,
-  searchQuery,
-  onSearchChange,
-}) {
+function TopCharts() {
+  const [activeFormat, setActiveFormat] = useState(ALL_ID);
+  const [activeCategory, setActiveCategory] = useState(ALL_ID);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleFormatChange = (formatId) => {
+    setActiveFormat(formatId);
+    setActiveCategory(ALL_ID);
+  };
+
   const query = searchQuery.trim().toLowerCase();
   const items = CATALOG_ITEMS.filter((item) => {
     const matchesFormat = item.format === activeFormat;
@@ -52,11 +55,11 @@ function TopCharts({
       </div>
       <FilterBar
         activeFormat={activeFormat}
-        onFormatChange={onFormatChange}
+        onFormatChange={handleFormatChange}
         activeCategory={activeCategory}
-        onCategoryChange={onCategoryChange}
+        onCategoryChange={setActiveCategory}
         searchQuery={searchQuery}
-        onSearchChange={onSearchChange}
+        onSearchChange={setSearchQuery}
       />
     </section>
   );
